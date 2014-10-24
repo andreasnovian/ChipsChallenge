@@ -19,4 +19,8 @@ public abstract class Board {
     public abstract void setMap();
     public abstract void move(Point newPosition);
     
+    public Board(int chipsNeeded){
+        this.chipsNeeded = chipsNeeded;
+    }
+    
 }

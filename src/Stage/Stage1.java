@@ -28,10 +28,10 @@ public class Stage1 extends Board {
      * 
      */
     public Stage1(String name){
-        player = new Player(name);
-        this.chipsNeeded = 3;
+        super(3);
+        this.player = new Player(name);
         this.barrierOpened = false;
-        setMap();
+        this.setMap();
     }
 
     /**
@@ -41,6 +41,9 @@ public class Stage1 extends Board {
     public void setMap() {
         for(int i=0;i<mapBoard.length;i++){
             for(int j=0;j<mapBoard[i].length;i++){
+                /**
+                 * Di bawah ini nanti disesuain sama map nya. Nggak semuanya Blank Tile.
+                 */
                 mapBoard[i][j] = new BlankTile();
             }
         }
@@ -61,7 +64,7 @@ public class Stage1 extends Board {
                     player.setPosition(newPosition);
                 }
             /**
-             * jika posisi sekarang berada dipintu
+             * jika posisi sekarang berada di pintu
              */    
             }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDoor()==true){
                 Door door = (Door)mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
