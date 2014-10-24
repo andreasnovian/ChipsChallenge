@@ -11,8 +11,7 @@ package Tile;
  * @author i13029
  */
 public class Finish extends AbstractTile{
-    
-    
+
     @Override
     public boolean isDanger() {
         return false;
@@ -37,9 +36,16 @@ public class Finish extends AbstractTile{
     public boolean isDoor() {
         return false;
     }
-    
-    public void setDoorIsOpen(boolean isOpen){
-        
+
+    @Override
+    public boolean isKey() {
+        return false;
     }
+
+    @Override
+    public boolean isWall() {
+        return false;
+    }
+    
 }
 

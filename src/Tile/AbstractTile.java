@@ -30,10 +30,18 @@ public abstract class AbstractTile {
     
     /**
      * 
-     * @return 
      */
     public abstract boolean isDoor();
     
+    /**
+     * 
+     */
+    public abstract boolean isWall();
+    
+    /**
+     * 
+     */
+    public abstract boolean isKey();
     
     /**
      * Method untuk mengecek apakah sudah berada dilantai finish atau tidak.

@@ -29,7 +29,7 @@ public class BlankTile extends AbstractTile{
 
     @Override
     public boolean isBarrier() {
-        return true;
+        return false;
     }
 
     @Override
@@ -37,8 +37,14 @@ public class BlankTile extends AbstractTile{
         return false;
     }
     
-    public void setDoorIsOpen(boolean isOpen){
-        
+    @Override
+    public boolean isKey() {
+        return false;
+    }
+
+    @Override
+    public boolean isWall() {
+        return false;
     }
     
 }

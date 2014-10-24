@@ -1,11 +1,16 @@
 package Stage;
 
 
+import Tile.AbstractTile;
 import Tile.Barrier;
 import Tile.BlankTile;
 import Tile.Board;
 import Tile.Door;
+import Tile.Finish;
+import Tile.IntegratedCircuit;
+import Tile.Key;
 import Tile.Player;
+import Tile.Wall;
 import java.awt.Point;
 
 
@@ -20,37 +25,70 @@ import java.awt.Point;
  * @author i13029
  */
 public class Stage1 extends Board {
-    private boolean barrierOpened;
     private Player player;
-    private Door door;
     
     /**
      * 
+     * @param name
      */
     public Stage1(String name){
-        super(3);
-        this.player = new Player(name);
-        this.barrierOpened = false;
-        this.setMap();
+        player = new Player(name);
+        mapBoard = new AbstractTile[20][20];
+        this.chipsNeeded = 3;
+        setMap();
     }
-
+    public Point getPlayerPosition(){
+        return player.getPosition();
+    }
     /**
      * 
      */
     @Override
     public void setMap() {
-        for(int i=0;i<mapBoard.length;i++){
-            for(int j=0;j<mapBoard[i].length;i++){
-                /**
-                 * Di bawah ini nanti disesuain sama map nya. Nggak semuanya Blank Tile.
-                 */
-                mapBoard[i][j] = new BlankTile();
+        for(int i=0 ;i<20;i++){
+            for(int j = 0 ; j<20 ;j++){
+                mapBoard[i][j]= new BlankTile();
             }
         }
+        
+        for(int i=0;i<20;i+=19){
+            for(int j = 0;j<20;j++){
+                mapBoard[i][j] = new Wall();
+            }
+        }
+        
+        for(int i=0;i<20;i++){
+            mapBoard[i][0] = new Wall();
+            mapBoard[i][19] = new Wall();
+        }
+        
+        for(int i=5 ; i<15 ; i+=9){
+            for(int j = 5;j<15;j++){
+                mapBoard[i][j] = new Wall();
+            }
+        }
+        
+        for(int i=5;i<14;i++){
+            mapBoard[i][5] = new Wall();
+            mapBoard[i][14] = new Wall();
+        }
+        
+        mapBoard[4][10] = new Finish();
+        mapBoard[11][6] = new Key("Red");
+        mapBoard[5][10] = new Barrier();
+        mapBoard[5][13] = new Door("Red");
+        mapBoard[11][7] = new IntegratedCircuit();
+        mapBoard[11][8] = new IntegratedCircuit();
+        mapBoard[11][9] = new IntegratedCircuit();
+        
+        
     }
 
     @Override
-    public void move(Point newPosition) {
+     public void move(int x,int y) {
+        int xNow = (int)player.getPosition().getX()+x;
+        int yNow = (int)player.getPosition().getY()+y;
+        Point newPosition = new Point(xNow , yNow);
         if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].canStep()==true){
             /**
              * jika posisi sekarang berada dibarrier
@@ -63,30 +101,94 @@ public class Stage1 extends Board {
                     mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
                     player.setPosition(newPosition);
                 }
+                else{
+                    
+                }
             /**
              * jika posisi sekarang berada di pintu
              */    
             }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDoor()==true){
                 Door door = (Door)mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
-                for(int i=0;i<player.getKeys().length;i++){
+                for(int i=0;i<player.getKeysLength();i++){
                     /**
-                     * jika jumlah chip yang dibutuhkan sama atau tidak dengan chip yang dibawa
+                     * jika warna pintu sama dengan kunci yang dimiliki
                      */
-                    if(door.getColor().equals(player.getKeys())){
+                    if(door.getColor().equalsIgnoreCase(player.getKeysIndex(i))){
                         mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
                         player.setPosition(newPosition);
                     }
                 }
+            /**
+             * jika yang diinjak itu bahaya atau tidak , jika bahaya , lansung kalah
+             */
             }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDanger()==true){
                 player.setLife(false);
+            /**
+             * jika posisi sekarang menginjak di posisi kunci
+             */
+            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isKey()==true){
+                Key newKey = (Key)mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
+                player.setKeys(newKey);
+                player.setPosition(newPosition);
+                mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+            }else{
+            player.setPosition(newPosition);
             }
-        }else{
-            
         }
+        printMap();
     }
     
-    public void newGame()
-    {
+     
+     
+     
+     
+     
+     
+    public void printMap(){
+        for(int i=0;i<20;i++){
+            for(int j=0;j<20;j++){
+                if(mapBoard[i][j].isBarrier()){
+                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
+                        System.out.print("P ");
+                    }else{
+                        System.out.print("B ");
+                    }
+                }
+                else if(mapBoard[i][j].isDoor()){
+                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
+                        System.out.print("P ");
+                    }else{
+                        System.out.print("D ");
+                    }
+                }
+                else if(mapBoard[i][j].isFinish()){
+                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
+                        System.out.print("P ");
+                    }else{
+                        System.out.print("F ");
+                    }
+                }
+                else if(mapBoard[i][j].isKey()){
+                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
+                        System.out.print("P ");
+                    }else{
+                        System.out.print("K ");
+                    }
+                }
+                else if(mapBoard[i][j].isWall()){
+                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
+                        System.out.print("P ");
+                    }else{
+                        System.out.print("W ");
+                    }
+                }else if(player.getPosition().getX()==i && player.getPosition().getY()==j){
+                    System.out.print("P ");
+                }else{
+                    System.out.print(". ");
+                }
+            }
+            System.out.println("");
+        }
         
     }
 }

@@ -10,19 +10,17 @@ package Tile;
  *
  * @author Dell
  */
-public class Door extends AbstractTile{
-    
-    private String doorColor;
-    
-    
-    public Door(String color){
-        this.doorColor = color;
-    }
-    
-    public String getColor(){
-        return this.doorColor;
-    }
+public class Key extends AbstractTile{
 
+    private String colorKey;
+    
+    public Key(String name){
+        colorKey = name;
+    }
+    public String getColorKey(){
+        return colorKey;
+    }
+    
     @Override
     public boolean isDanger() {
         return false;
@@ -40,22 +38,22 @@ public class Door extends AbstractTile{
 
     @Override
     public boolean isDoor() {
-        return true;
-    }
-
-    @Override
-    public boolean isFinish() {
         return false;
     }
 
     @Override
     public boolean isKey() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean isFinish() {
+        return false; 
     }
 
     @Override
     public boolean isWall() {
         return false;
     }
-       
+    
 }

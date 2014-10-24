@@ -1,6 +1,7 @@
 package Tile;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,14 +17,14 @@ public class Player {
     private String name;
     private boolean life;
     private int chips;
-    private Object[] keys;
+    private ArrayList<Key> keyList;
     private Point position;
     
     public Player(String name){
         this.name = name;
         this.life = true;
         int chips = 0;
-        this.keys= new Object[5];
+        this.keyList = new ArrayList<>();
         this.position = new Point(10 , 10);
     }
 
@@ -39,12 +40,12 @@ public class Player {
         return chips;
     }
 
-    public Object[] getKeys() {
-        return keys;
+    public int getKeysLength() {
+        return keyList.size();
     }
 
     public String getKeysIndex(int index){
-        return keys[index].toString();
+        return keyList.get(index).toString();
     }
     
     public Point getPosition() {
@@ -59,8 +60,8 @@ public class Player {
         this.chips = chips;
     }
 
-    public void setKeys(Object[] keys) {
-        this.keys = keys;
+    public void setKeys(Key newKey) {
+        keyList.add(newKey);
     }
 
     public void setPosition(Point position) {
