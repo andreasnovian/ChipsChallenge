@@ -68,5 +68,8 @@ public class Stage1 extends Board {
         }
     }
     
-
+    public void newGame()
+    {
+        
+    }
 }
