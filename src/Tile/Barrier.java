@@ -50,8 +50,21 @@ public class Barrier extends AbstractTile{
 
     @Override
     public boolean canStep() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
 
+    @Override
+    public boolean isBarrier() {
+        return true;
+    }
+
+    @Override
+    public boolean isDoor() {
+        return false;
+    }
+    
+    public void setDoorIsOpen(boolean isOpen){
+        
+    }
 
 }

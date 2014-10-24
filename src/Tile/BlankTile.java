@@ -26,5 +26,19 @@ public class BlankTile extends AbstractTile{
     public boolean isFinish() {
         return false;
     }
+
+    @Override
+    public boolean isBarrier() {
+        return true;
+    }
+
+    @Override
+    public boolean isDoor() {
+        return false;
+    }
+    
+    public void setDoorIsOpen(boolean isOpen){
+        
+    }
     
 }

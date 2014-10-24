@@ -26,5 +26,18 @@ public class Fire extends AbstractTile{
     public boolean isFinish() {
         return false;
     }
+
+    @Override
+    public boolean isBarrier() {
+        return false;
+    }
+
+    @Override
+    public boolean isDoor() {
+        return false;
+    }
     
+    public void setDoorIsOpen(boolean isOpen){
+        
+    }
 }

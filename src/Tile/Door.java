@@ -6,14 +6,24 @@
 
 package Tile;
 
-import javax.swing.text.AbstractDocument;
-
 /**
  *
- * @author i13029
+ * @author Dell
  */
-public class Wall extends AbstractTile{
-   
+public class Door extends AbstractTile{
+    
+    private String doorColor;
+    
+    
+    public Door(String color){
+        this.doorColor = color;
+        this.doorIsOpen = false;
+    }
+    
+    public String getColor(){
+        return this.doorColor;
+    }
+
     @Override
     public boolean isDanger() {
         return false;
@@ -21,26 +31,27 @@ public class Wall extends AbstractTile{
 
     @Override
     public boolean canStep() {
+        return true;
+    }
+
+    @Override
+    public boolean isBarrier() {
         return false;
+    }
+
+    @Override
+    public boolean isDoor() {
+        return true;
     }
 
     @Override
     public boolean isFinish() {
         return false;
     }
-
-    @Override
-    public boolean isBarrier() {
-        return true;
-    }
-
-    @Override
-    public boolean isDoor() {
-        return false;
-    }
     
     public void setDoorIsOpen(boolean isOpen){
-        
+        doorIsOpen = true;
     }
+
     
 }

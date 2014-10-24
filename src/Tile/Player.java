@@ -43,6 +43,10 @@ public class Player {
         return keys;
     }
 
+    public String getKeysIndex(int index){
+        return keys[index].toString();
+    }
+    
     public Point getPosition() {
         return position;
     }
