@@ -17,7 +17,6 @@ public class Door extends AbstractTile{
     
     public Door(String color){
         this.doorColor = color;
-        this.doorIsOpen = false;
     }
     
     public String getColor(){
@@ -48,10 +47,5 @@ public class Door extends AbstractTile{
     public boolean isFinish() {
         return false;
     }
-    
-    public void setDoorIsOpen(boolean isOpen){
-        doorIsOpen = true;
-    }
-
-    
+       
 }

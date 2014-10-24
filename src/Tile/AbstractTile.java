@@ -11,9 +11,7 @@ package Tile;
  * @author i13029
  */
 public abstract class AbstractTile {
-    
-    protected boolean doorIsOpen;
-    
+   
     
     /**
      * Method untuk mengecek apakah lantai berbahaya atau tidak.
@@ -35,15 +33,6 @@ public abstract class AbstractTile {
      * @return 
      */
     public abstract boolean isDoor();
-    
-    /**
-     * 
-     */
-    public abstract void setDoorIsOpen(boolean isOpen);
-    
-    /**
-     * 
-     */
     
     
     /**

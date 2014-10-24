@@ -49,15 +49,29 @@ public class Stage1 extends Board {
     @Override
     public void move(Point newPosition) {
         if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].canStep()==true){
+            /**
+             * jika posisi sekarang berada dibarrier
+             */
             if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isBarrier()==true){
+                /**
+                 * jika jumlah chip yang dibutuhkan sama atau tidak dengan chip yang dibawa
+                 */
                 if(this.chipsNeeded == player.getChips()){
-                    //mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].setBarrier(true);
+                    mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+                    player.setPosition(newPosition);
                 }
+            /**
+             * jika posisi sekarang berada dipintu
+             */    
             }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDoor()==true){
                 Door door = (Door)mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
                 for(int i=0;i<player.getKeys().length;i++){
+                    /**
+                     * jika jumlah chip yang dibutuhkan sama atau tidak dengan chip yang dibawa
+                     */
                     if(door.getColor().equals(player.getKeys())){
-                        mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].setDoorIsOpen(true);
+                        mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+                        player.setPosition(newPosition);
                     }
                 }
             }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDanger()==true){
