@@ -1,17 +1,13 @@
+
 package Tile;
 
 import java.awt.Point;
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author i13029
+ * Kelas yang merepresentasikan pemain dalam permainan ini
+ * 
+ * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Player {
     private String name;
@@ -45,7 +41,7 @@ public class Player {
     }
 
     public String getKeysIndex(int index){
-        return keyList.get(index).toString();
+        return keyList.get(index).getColorKey();
     }
     
     public Point getPosition() {

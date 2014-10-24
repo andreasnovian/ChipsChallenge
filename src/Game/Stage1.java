@@ -1,28 +1,12 @@
-package Stage;
 
+package Game;
 
-import Tile.AbstractTile;
-import Tile.Barrier;
-import Tile.BlankTile;
-import Tile.Board;
-import Tile.Door;
-import Tile.Finish;
-import Tile.IntegratedCircuit;
-import Tile.Key;
-import Tile.Player;
-import Tile.Wall;
+import Tile.*;
 import java.awt.Point;
 
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author i13029
+ * Kelas Stage1 yang merepresentasikan level 1 dalam permainan ini
+ * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Stage1 extends Board {
     private Player player;

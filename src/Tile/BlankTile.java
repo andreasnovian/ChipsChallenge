@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Tile;
 
 /**
- *
- * @author i13029
+ * Kelas yang merepresentasikan tile lantai
+ * Tile ini dapat dilewati tanpa syarat apapun
+ * 
+ * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class BlankTile extends AbstractTile{
 

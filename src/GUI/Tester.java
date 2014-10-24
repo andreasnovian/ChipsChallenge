@@ -1,22 +1,16 @@
 
-import Stage.Stage1;
+package GUI;
+
+import Game.Stage1;
 import java.util.Scanner;
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author Dell
+ * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Tester {
     public static void main(String[] args) {
         Stage1 stage1 = new Stage1("Kevin");
-        stage1.printMap();
         Scanner sc = new Scanner(System.in);
         
         stage1.printMap();
