@@ -3,18 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
-
-import Stage.Stage1;
-import Tile.Board;
 
 /**
  *
- * @author Andreas Novian
+ * @author Dell
  */
 public class Tester {
-    public static void main (String[] args){
-        Board objBoard = new Stage1("Melinda");
-        
-    }
+    
 }
