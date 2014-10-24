@@ -19,9 +19,11 @@ public class Stage1 extends Board {
         mapBoard = new AbstractTile[20][20];
         setMap();
     }
+    
     public Point getPlayerPosition(){
         return player.getPosition();
     }
+    
     /**
      * 
      */
@@ -57,6 +59,7 @@ public class Stage1 extends Board {
         
         mapBoard[4][10] = new Finish();
         mapBoard[11][6] = new Key("Red");
+        mapBoard[12][6] = new Fire();
         mapBoard[5][10] = new Barrier();
         mapBoard[5][13] = new Door("Red");
         mapBoard[6][7] = new IntegratedCircuit();
@@ -71,15 +74,15 @@ public class Stage1 extends Board {
         int xNow = (int)player.getPosition().getX()+x;
         int yNow = (int)player.getPosition().getY()+y;
         Point newPosition = new Point(xNow , yNow);
-        if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].canStep()==true){
+        if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].canBeStepped()){
             /**
              * jika posisi sekarang berada dibarrier
              */
-            if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isBarrier()==true){
+            if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isBarrier()){
                 /**
                  * jika jumlah chip yang dibutuhkan sama atau tidak dengan chip yang dibawa
                  */
-                if(this.chipsNeeded == player.getChips()){
+                if(this.chipsNeeded == player.getIntegratedCircuit()){
                     mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
                     player.setPosition(newPosition);
                 }
@@ -89,7 +92,7 @@ public class Stage1 extends Board {
             /**
              * jika posisi sekarang berada di pintu
              */    
-            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDoor()==true){
+            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDoor()){
                 Door door = (Door)mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
                 for(int i=0;i<player.getKeysLength();i++){
                     /**
@@ -103,17 +106,25 @@ public class Stage1 extends Board {
             /**
              * jika yang diinjak itu bahaya atau tidak , jika bahaya , lansung kalah
              */
-            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDanger()==true){
+            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDanger()){
                 player.setLife(false);
             /**
              * jika posisi sekarang menginjak di posisi kunci
              */
-            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isKey()==true){
+            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isKey()){
                 Key newKey = (Key)mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
                 player.setKeys(newKey);
                 player.setPosition(newPosition);
                 mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
-            }else{
+            /**
+             * jika posisi sekarang menginjak di posisi Integrated Circuit
+             */
+            } else if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isIntegratedCircuit()){
+                player.addIntegratedCircuit();
+                player.setPosition(newPosition);
+                mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+            }
+            else{
             player.setPosition(newPosition);
             }
         }

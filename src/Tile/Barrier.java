@@ -40,8 +40,13 @@ public class Barrier extends AbstractTile{
     }
 
     @Override
-    public boolean canStep() {
+    public boolean canBeStepped() {
         return true;
+    }
+    
+    @Override
+    public boolean isIntegratedCircuit() {
+        return false;
     }
 
     @Override

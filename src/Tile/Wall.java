@@ -15,7 +15,12 @@ public class Wall extends AbstractTile{
     }
 
     @Override
-    public boolean canStep() {
+    public boolean canBeStepped() {
+        return false;
+    }
+    
+    @Override
+    public boolean isIntegratedCircuit() {
         return false;
     }
 

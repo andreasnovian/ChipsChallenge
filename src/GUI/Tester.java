@@ -2,19 +2,20 @@
 package GUI;
 
 import Game.Stage1;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 /**
  *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
-public class Tester {
+public class Tester{
     public static void main(String[] args) {
         Stage1 stage1 = new Stage1("Kevin");
         Scanner sc = new Scanner(System.in);
         
         stage1.printMap();
-        
         while(true){
             String input = sc.next();
             if(input.equalsIgnoreCase("a")){

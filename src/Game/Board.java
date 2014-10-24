@@ -45,6 +45,9 @@ public abstract class Board {
                 if (positionX==i && positionY==j){
                     System.out.print("P ");
                 }
+                else if(mapBoard[i][j].isDanger()){
+                    System.out.print("A ");
+                }
                 else if(mapBoard[i][j].isBarrier()){
                     System.out.print("B ");
                 }
@@ -59,6 +62,9 @@ public abstract class Board {
                 }
                 else if(mapBoard[i][j].isWall()){
                     System.out.print("W ");
+                }
+                else if(mapBoard[i][j].isIntegratedCircuit()){
+                    System.out.print("I ");
                 }
                 else {
                     System.out.print(". ");

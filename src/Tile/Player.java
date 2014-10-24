@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Player {
-    private String name;
+    private final String name;
     private boolean life;
-    private int chips;
+    private int integratedCircuit;
     private ArrayList<Key> keyList;
     private Point position;
     
@@ -32,8 +32,12 @@ public class Player {
         return life;
     }
 
-    public int getChips() {
-        return chips;
+    public int getIntegratedCircuit() {
+        return integratedCircuit;
+    }
+    
+    public void addIntegratedCircuit(){
+        this.integratedCircuit++;
     }
 
     public int getKeysLength() {
@@ -50,10 +54,6 @@ public class Player {
 
     public void setLife(boolean life) {
         this.life = life;
-    }
-
-    public void setChips(int chips) {
-        this.chips = chips;
     }
 
     public void setKeys(Key newKey) {

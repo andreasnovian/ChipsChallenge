@@ -18,7 +18,13 @@ public abstract class AbstractTile {
      * Method untuk mengecek apakah lantai dapat diinjak atau tidak.
      * @return 
      */
-    public abstract boolean canStep();
+    public abstract boolean canBeStepped();
+    
+    /**
+     * 
+     * @return 
+     */
+    public abstract boolean isIntegratedCircuit();
     
     /**
      * 
