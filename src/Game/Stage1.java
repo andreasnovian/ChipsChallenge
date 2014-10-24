@@ -9,16 +9,14 @@ import java.awt.Point;
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Stage1 extends Board {
-    private Player player;
-    
+ 
     /**
      * 
      * @param name
      */
     public Stage1(String name){
-        player = new Player(name);
+        super(3,name);
         mapBoard = new AbstractTile[20][20];
-        this.chipsNeeded = 3;
         setMap();
     }
     public Point getPlayerPosition(){
@@ -61,9 +59,9 @@ public class Stage1 extends Board {
         mapBoard[11][6] = new Key("Red");
         mapBoard[5][10] = new Barrier();
         mapBoard[5][13] = new Door("Red");
-        mapBoard[11][7] = new IntegratedCircuit();
-        mapBoard[11][8] = new IntegratedCircuit();
-        mapBoard[11][9] = new IntegratedCircuit();
+        mapBoard[6][7] = new IntegratedCircuit();
+        mapBoard[6][8] = new IntegratedCircuit();
+        mapBoard[6][9] = new IntegratedCircuit();
         
         
     }
@@ -120,59 +118,5 @@ public class Stage1 extends Board {
             }
         }
         printMap();
-    }
-    
-     
-     
-     
-     
-     
-     
-    public void printMap(){
-        for(int i=0;i<20;i++){
-            for(int j=0;j<20;j++){
-                if(mapBoard[i][j].isBarrier()){
-                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
-                        System.out.print("P ");
-                    }else{
-                        System.out.print("B ");
-                    }
-                }
-                else if(mapBoard[i][j].isDoor()){
-                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
-                        System.out.print("P ");
-                    }else{
-                        System.out.print("D ");
-                    }
-                }
-                else if(mapBoard[i][j].isFinish()){
-                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
-                        System.out.print("P ");
-                    }else{
-                        System.out.print("F ");
-                    }
-                }
-                else if(mapBoard[i][j].isKey()){
-                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
-                        System.out.print("P ");
-                    }else{
-                        System.out.print("K ");
-                    }
-                }
-                else if(mapBoard[i][j].isWall()){
-                    if(player.getPosition().getX()==i && player.getPosition().getY()==j){
-                        System.out.print("P ");
-                    }else{
-                        System.out.print("W ");
-                    }
-                }else if(player.getPosition().getX()==i && player.getPosition().getY()==j){
-                    System.out.print("P ");
-                }else{
-                    System.out.print(". ");
-                }
-            }
-            System.out.println("");
-        }
-        
     }
 }

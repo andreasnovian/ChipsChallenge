@@ -15,9 +15,7 @@ public class Barrier extends AbstractTile{
     public boolean isDanger() {
         return false;
     }
-
-    
-    
+        
     /**
      * 
      * @param requireChip
@@ -31,8 +29,6 @@ public class Barrier extends AbstractTile{
             return false;
         }
     }
-
-    
     
     /**
      * 
