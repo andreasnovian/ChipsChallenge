@@ -9,6 +9,7 @@ import java.awt.Point;
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Stage1 extends Board {
+    private boolean isFinished;
  
     /**
      * 
@@ -16,6 +17,7 @@ public class Stage1 extends Board {
      */
     public Stage1(String name){
         super(3,name);
+        isFinished =false;
         mapBoard = new AbstractTile[20][20];
         setMap();
     }
@@ -71,12 +73,12 @@ public class Stage1 extends Board {
 
     @Override
      public void move(int x,int y) {
-        int xNow = (int)player.getPosition().getX()+x;
-        int yNow = (int)player.getPosition().getY()+y;
-        Point newPosition = new Point(xNow , yNow);
+        int newX = (int)player.getPosition().getX()+x;
+        int newY = (int)player.getPosition().getY()+y;
+        Point newPosition = new Point(newX , newY);
         if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].canBeStepped()){
             /**
-             * jika posisi sekarang berada dibarrier
+             * jika posisi sekarang berada di barrier
              */
             if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isBarrier()){
                 /**
@@ -108,6 +110,7 @@ public class Stage1 extends Board {
              */
             }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDanger()){
                 player.setLife(false);
+                player.setPosition(newPosition);
             /**
              * jika posisi sekarang menginjak di posisi kunci
              */
@@ -123,6 +126,9 @@ public class Stage1 extends Board {
                 player.addIntegratedCircuit();
                 player.setPosition(newPosition);
                 mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+            }else if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isFinish()){
+                player.setPosition(newPosition);
+                isFinished = true;
             }
             else{
             player.setPosition(newPosition);
@@ -130,4 +136,8 @@ public class Stage1 extends Board {
         }
         printMap();
     }
+     
+     public boolean getIsFinished(){
+         return isFinished;
+     }
 }

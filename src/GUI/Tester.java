@@ -29,6 +29,14 @@ public class Tester{
             }else{
                 System.out.println("Wrong input");
             }
+            if (stage1.isPlayerDead()){
+                System.out.println("YOU LOSE!");
+                break;
+            }
+            if (stage1.getIsFinished()){
+                System.out.println("YOU WIN!");
+                break;
+            }
         }
         
     }

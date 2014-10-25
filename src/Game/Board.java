@@ -74,4 +74,9 @@ public abstract class Board {
         }
         
     }
+    
+    public boolean isPlayerDead(){
+        return !player.isLife();
+    }
+    
 }
