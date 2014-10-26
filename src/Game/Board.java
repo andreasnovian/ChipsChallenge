@@ -6,6 +6,8 @@ import Tile.BlankTile;
 import Tile.Door;
 import Tile.Key;
 import Tile.Player;
+import Tile.Table;
+import Tile.Wall;
 import java.awt.Point;
 
 /**
@@ -14,21 +16,17 @@ import java.awt.Point;
  */
 public abstract class Board {
 
-    protected int chipsNeeded;
+    protected int ScriptNeeded;
     protected Player player;
     protected boolean isFinished;
     protected AbstractTile[][] mapBoard;
 
-    public Board(int chipsNeeded, String name){
-        this.chipsNeeded = chipsNeeded;
+    public Board(int scriptNeeded, String name){
+        this.ScriptNeeded = scriptNeeded;
         this.player = new Player(name);
+        this.mapBoard = new AbstractTile[15][15];
         this.isFinished =false;
     }
-    
-    /**
-     * 
-     */
-    public abstract void setMap();
     
     /**
      * 
@@ -36,20 +34,20 @@ public abstract class Board {
      * @param y 
      */
     public void move(int x , int y){
-        int newX = (int)player.getPosition().getX()+x;
-        int newY = (int)player.getPosition().getY()+y;
+        int newX = (int)this.player.getPosition().getX()+x;
+        int newY = (int)this.player.getPosition().getY()+y;
         Point newPosition = new Point(newX , newY);
-        if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].canBeStepped()){
+        if (this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].canBeStepped()){
             /**
              * jika posisi sekarang berada di barrier
              */
-            if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isBarrier()){
+            if(this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isBarrier()){
                 /**
                  * jika jumlah chip yang dibutuhkan sama atau tidak dengan chip yang dibawa
                  */
-                if(this.chipsNeeded == player.getIntegratedCircuit()){
-                    mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
-                    player.setPosition(newPosition);
+                if(this.ScriptNeeded == this.player.getScript()){
+                    this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+                    this.player.setPosition(newPosition);
                 }
                 else{
                     
@@ -57,44 +55,44 @@ public abstract class Board {
             /**
              * jika posisi sekarang berada di pintu
              */    
-            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDoor()){
-                Door door = (Door)mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
-                for(int i=0;i<player.getKeysLength();i++){
+            }else if(this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDoor()){
+                Door door = (Door)this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
+                for(int i=0;i<this.player.getKeysLength();i++){
                     /**
                      * jika warna pintu sama dengan kunci yang dimiliki
                      */
-                    if(door.getColor().equalsIgnoreCase(player.getKeysIndex(i))){
-                        mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
-                        player.setPosition(newPosition);
+                    if(door.getColor().equalsIgnoreCase(this.player.getKeysIndex(i))){
+                        this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+                        this.player.setPosition(newPosition);
                     }
                 }
             /**
              * jika yang diinjak itu bahaya atau tidak , jika bahaya , lansung kalah
              */
-            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDanger()){
-                player.setLife(false);
-                player.setPosition(newPosition);
+            }else if(this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isDanger()){
+                this.player.setLife(false);
+                this.player.setPosition(newPosition);
             /**
              * jika posisi sekarang menginjak di posisi kunci
              */
-            }else if(mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isKey()){
-                Key newKey = (Key)mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
-                player.setKeys(newKey);
-                player.setPosition(newPosition);
-                mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+            }else if(this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isKey()){
+                Key newKey = (Key)this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
+                this.player.setKeys(newKey);
+                this.player.setPosition(newPosition);
+                this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
             /**
              * jika posisi sekarang menginjak di posisi Integrated Circuit
              */
-            } else if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isIntegratedCircuit()){
-                player.addIntegratedCircuit();
-                player.setPosition(newPosition);
-                mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+            } else if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isScript()){
+                this.player.addScript();
+                this.player.setPosition(newPosition);
+                this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
             }else if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isFinish()){
-                player.setPosition(newPosition);
-                isFinished = true;
+                this.player.setPosition(newPosition);
+                this.isFinished = true;
             }
             else{
-            player.setPosition(newPosition);
+            this.player.setPosition(newPosition);
             }
         }
         printMap();
@@ -104,34 +102,42 @@ public abstract class Board {
      * 
      */
     public void printMap(){
-        int positionX = player.getPosition().x;
-        int positionY = player.getPosition().y;
+        int positionX = this.player.getPosition().x;
+        int positionY = this.player.getPosition().y;
         
-        for(int i=0;i<20;i++){
-            for(int j=0;j<20;j++){
+        for(int i=0;i<this.mapBoard.length;i++){
+            for(int j=0;j<this.mapBoard.length;j++){
                 if (positionX==i && positionY==j){
                     System.out.print("P ");
                 }
-                else if(mapBoard[i][j].isDanger()){
-                    System.out.print("A ");
+                else if(this.mapBoard[i][j].isDanger()){
+                    System.out.print("X ");
                 }
-                else if(mapBoard[i][j].isBarrier()){
+                else if(this.mapBoard[i][j].isBarrier()){
                     System.out.print("B ");
                 }
-                else if(mapBoard[i][j].isDoor()){
-                    System.out.print("D ");
+                else if(this.mapBoard[i][j].isDoor()){
+                    Door door  = (Door)this.mapBoard[i][j];
+                    System.out.print(door.getColor()+ " ");
                 }
-                else if(mapBoard[i][j].isFinish()){
+                else if(this.mapBoard[i][j].isFinish()){
                     System.out.print("F ");
                 }
-                else if(mapBoard[i][j].isKey()){
-                    System.out.print("K ");
+                else if(this.mapBoard[i][j].isKey()){
+                    Key key = (Key)this.mapBoard[i][j];
+                    System.out.print(key.getColorKey()+" ");
                 }
-                else if(mapBoard[i][j].isWall()){
+                else if(this.mapBoard[i][j].isWall()){
                     System.out.print("W ");
                 }
-                else if(mapBoard[i][j].isIntegratedCircuit()){
+                else if(this.mapBoard[i][j].isScript()){
                     System.out.print("I ");
+                }
+                else if(this.mapBoard[i][j].isComputer()){
+                    System.out.print("V ");
+                }
+                else if(this.mapBoard[i][j].isTable()){
+                    System.out.print("T ");
                 }
                 else {
                     System.out.print(". ");
@@ -139,7 +145,11 @@ public abstract class Board {
             }
             System.out.println("");
         }
-        
+        System.out.print("Player Keys : ");
+        for(int x = 0;x<player.getKeysLength();x++){
+            System.out.print(player.getKeysIndex(x)+" ");
+        }
+        System.out.println("");
     }
     
     public boolean isPlayerDead(){
@@ -149,5 +159,53 @@ public abstract class Board {
     public boolean getIsFinished(){
          return isFinished;
      }
+    
+   public Point getPlayerPosition(){
+        return player.getPosition();
+    }
+    
+    /**
+     * 
+     */
+    protected void setMapPosition(){
+        this.setAllBlankTilePosition();
+        this.setWallBorderPosition();
+        this.setBarrierPosition();
+        this.setComputerPosition();
+        this.setDoorPosition();
+        this.setFinishPosition();
+        this.setGirlFrienPosition();
+        this.setKeyPosition();
+        this.setScriptPosition();
+        this.setTablePosition();
+        this.setWallMapPosition();
+    }
+    private void setAllBlankTilePosition(){
+        for(int i = 0;i<mapBoard.length;i++){
+            for(int j = 0;j<mapBoard.length;j++){
+                mapBoard[i][j] = new BlankTile();
+            }
+        }
+    }
+    private void setWallBorderPosition(){
+        for(int i = 0;i<mapBoard.length;i++){
+            mapBoard[0][i] = new Wall();
+            mapBoard[mapBoard.length-1][i] = new Wall();
+        }
+        for(int i = 0;i<mapBoard.length;i++){
+            mapBoard[i][0] = new Wall();
+            mapBoard[i][mapBoard.length-1] = new Wall();
+        }
+    }
+    protected abstract void setWallMapPosition();
+    protected abstract void setTablePosition();
+    protected abstract void setDoorPosition();
+    protected abstract void setKeyPosition();
+    protected abstract void setComputerPosition();
+    protected abstract void setGirlFrienPosition();
+    protected abstract void setScriptPosition();
+    protected abstract void setBarrierPosition();
+    protected abstract void setFinishPosition();
+    
     
 }

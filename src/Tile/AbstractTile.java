@@ -24,7 +24,7 @@ public abstract class AbstractTile {
      * 
      * @return 
      */
-    public abstract boolean isIntegratedCircuit();
+    public abstract boolean isScript();
     
     /**
      * 
@@ -56,4 +56,6 @@ public abstract class AbstractTile {
      */
     public abstract boolean isFinish();
     
+    public abstract boolean isComputer();
+    public abstract boolean isTable();
 }

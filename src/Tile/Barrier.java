@@ -23,7 +23,7 @@ public class Barrier extends AbstractTile{
      * @return 
      */
     public boolean canStepBarrier(int level , int chips) {
-        if(level+2 == chips){
+        if(level+5 == chips){
             return true;
         }else{
             return false;
@@ -45,7 +45,7 @@ public class Barrier extends AbstractTile{
     }
     
     @Override
-    public boolean isIntegratedCircuit() {
+    public boolean isScript() {
         return false;
     }
 
@@ -66,6 +66,16 @@ public class Barrier extends AbstractTile{
 
     @Override
     public boolean isWall() {
+        return false;
+    }
+
+    @Override
+    public boolean isComputer() {
+        return false;
+    }
+
+    @Override
+    public boolean isTable() {
         return false;
     }
 

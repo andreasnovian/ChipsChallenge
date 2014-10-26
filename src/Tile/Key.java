@@ -27,7 +27,7 @@ public class Key extends AbstractTile{
     }
     
     @Override
-    public boolean isIntegratedCircuit() {
+    public boolean isScript() {
         return false;
     }
 
@@ -53,6 +53,16 @@ public class Key extends AbstractTile{
 
     @Override
     public boolean isWall() {
+        return false;
+    }
+
+    @Override
+    public boolean isComputer() {
+        return false;
+    }
+
+    @Override
+    public boolean isTable() {
         return false;
     }
     

@@ -20,7 +20,7 @@ public class Wall extends AbstractTile{
     }
     
     @Override
-    public boolean isIntegratedCircuit() {
+    public boolean isScript() {
         return false;
     }
 
@@ -47,6 +47,16 @@ public class Wall extends AbstractTile{
     @Override
     public boolean isWall() {
         return true;
+    }
+
+    @Override
+    public boolean isComputer() {
+        return false;
+    }
+
+    @Override
+    public boolean isTable() {
+        return false;
     }
     
 }

@@ -12,14 +12,14 @@ import java.util.ArrayList;
 public class Player {
     private final String name;
     private boolean life;
-    private int integratedCircuit;
+    private int script;
     private ArrayList<Key> keyList;
     private Point position;
     
     public Player(String name){
         this.name = name;
         this.life = true;
-        int chips = 0;
+        this.script = 0;
         this.keyList = new ArrayList<>();
         this.position = new Point(10 , 10);
     }
@@ -32,12 +32,12 @@ public class Player {
         return life;
     }
 
-    public int getIntegratedCircuit() {
-        return integratedCircuit;
+    public int getScript() {
+        return script;
     }
     
-    public void addIntegratedCircuit(){
-        this.integratedCircuit++;
+    public void addScript(){
+        this.script++;
     }
 
     public int getKeysLength() {
