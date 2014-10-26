@@ -19,7 +19,7 @@ import java.awt.Point;
 
 /**
  *
- * @author Dell
+ * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Stage1 extends Board{
 

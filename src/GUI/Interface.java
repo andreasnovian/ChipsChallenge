@@ -8,7 +8,7 @@ package GUI;
 
 /**
  *
- * @author Dell
+ * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Interface extends javax.swing.JFrame {
 
