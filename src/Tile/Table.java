@@ -16,7 +16,7 @@ public class Table extends AbstractTile{
 
     @Override
     public boolean canBeStepped() {
-        return false;
+        return true;
     }
     
     @Override

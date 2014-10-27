@@ -79,14 +79,14 @@ public abstract class Board {
                 Key newKey = (Key)this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()];
                 this.player.setKeys(newKey);
                 this.player.setPosition(newPosition);
-                this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+                this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new Table();
             /**
              * jika posisi sekarang menginjak di posisi Integrated Circuit
              */
             } else if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isScript()){
                 this.player.addScript();
                 this.player.setPosition(newPosition);
-                this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new BlankTile();
+                this.mapBoard[(int)newPosition.getX()][(int)newPosition.getY()] = new Table();
             }else if (mapBoard[(int)newPosition.getX()][(int)newPosition.getY()].isFinish()){
                 this.player.setPosition(newPosition);
                 this.isFinished = true;
