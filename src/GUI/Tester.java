@@ -45,11 +45,12 @@ public class Tester {
             }
         }
         
-        if(win == true){
+        if(win){
+            win = false;
             System.out.println("NEXT STAGE!");
             Stage2 stage2 = new Stage2("Kevin");
             stage2.printMap();
-            while(true){ 
+            while(true){
                 String input = sc.next();
                 if(input.equalsIgnoreCase("a")){
                     stage2.move(0, -1);
@@ -68,38 +69,38 @@ public class Tester {
                 }
                 if (stage2.getIsFinished()){
                     System.out.println("YOU WIN!");
+                    win = true;
                     break;
                 }
             }
-            if(win==true){
-                Stage3 stage3 = new Stage3("Kevin");
-                stage3.printMap();
-                while(true){ 
-                    String input = sc.next();
-                    if(input.equalsIgnoreCase("a")){
-                        stage3.move(0, -1);
-                    }else if(input.equalsIgnoreCase("d")){
-                        stage3.move(0,1);
-                    }else if(input.equalsIgnoreCase("s")){
-                        stage3.move(1, 0);
-                    }else if(input.equalsIgnoreCase("w")){
-                        stage3.move(-1, 0);
-                    }else{
-                        System.out.println("Wrong input");
-                    }
-                    if (stage3.isPlayerDead()){
-                        System.out.println("YOU LOSE!");
-                        break;
-                    }
+        }
+        
+        if(win){
+            System.out.println("NEXT STAGE!");
+            Stage3 stage3 = new Stage3("Kevin");
+            stage3.printMap();
+            while(true){
+                String input = sc.next();
+                if(input.equalsIgnoreCase("a")){
+                    stage3.move(0, -1);
+                }else if(input.equalsIgnoreCase("d")){
+                    stage3.move(0,1);
+                }else if(input.equalsIgnoreCase("s")){
+                    stage3.move(1, 0);
+                }else if(input.equalsIgnoreCase("w")){
+                    stage3.move(-1, 0);
+                }else{
+                    System.out.println("Wrong input");
+                }
+                if (stage3.isPlayerDead()){
+                    System.out.println("YOU LOSE!");
+                    break;
                 }
                 if (stage3.getIsFinished()){
                     System.out.println("YOU WIN!");
-                }else{
-
+                    break;
                 }
             }
-        }else{
-            
         }
     }
 }
