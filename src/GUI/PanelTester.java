@@ -163,12 +163,5 @@ public class PanelTester extends JPanel {
             x=0;
         }
     }
-    
-    public static void main(String[] args){
-        JFrame frame = new JFrame("Coba");
-        frame.setContentPane(new PanelTester());
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-    }
+
 }
