@@ -11,7 +11,7 @@ import javax.swing.*;
  *
  * @author Andreas Novian
  */
-public class PanelTester extends JPanel {
+public class PanelTester extends JPanel{
     public static final int CANVAS_WIDTH = 750;
     public static final int CANVAS_HEIGHT = 750;
     
