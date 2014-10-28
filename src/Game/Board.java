@@ -5,7 +5,6 @@ import Tile.AbstractTile;
 import Tile.BlankTile;
 import Tile.Door;
 import Tile.Key;
-import Tile.Player;
 import Tile.Table;
 import Tile.Wall;
 import java.awt.Point;
