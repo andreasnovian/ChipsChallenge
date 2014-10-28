@@ -1,6 +1,7 @@
 
 package GUI;
 
+import Tile.AbstractTile;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -12,9 +13,9 @@ import javax.swing.*;
  * @author Andreas Novian
  */
 public class PanelTester extends JPanel{
-    public static final int CANVAS_WIDTH = 750;
-    public static final int CANVAS_HEIGHT = 750;
-    
+    public static final int CANVAS_WIDTH = 600;
+    public static final int CANVAS_HEIGHT = 600;
+    public AbstractTile[][] mapBoard;
     private Image[][] img;
     private URL[] brianUrl,candraUrl,mantanUrl,mariskaUrl,pascalUrl,chairUrl,doorUrl,keyUrl,pcUrl,scriptUrl,tableUrl,wallUrl;
     
@@ -22,6 +23,7 @@ public class PanelTester extends JPanel{
         loadImage();
         setImage();
         setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
+         
     }
     
     private void loadImage(){
@@ -157,9 +159,9 @@ public class PanelTester extends JPanel{
         for (int i=0;i<15;i++){
             for (int j=0;j<15;j++){
                 g.drawImage(img[i][j],x,y,null);
-                x+=50;
+                x+=40;
             }
-            y+=50;
+            y+=40;
             x=0;
         }
     }

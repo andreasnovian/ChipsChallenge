@@ -159,6 +159,10 @@ public abstract class Board {
          return isFinished;
      }
     
+    public void setIsFinished(boolean isFinish){
+        isFinished = isFinish;
+    }
+    
    public Point getPlayerPosition(){
         return player.getPosition();
     }

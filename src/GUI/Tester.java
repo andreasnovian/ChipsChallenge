@@ -21,7 +21,7 @@ public class Tester {
         Stage1 stage1 = new Stage1("Kevin");
         stage1.printMap();
         while(true){ 
-            String input = sc.next();
+            String input = sc.nextLine();
             if(input.equalsIgnoreCase("a")){
                 stage1.move(0, -1);
             }else if(input.equalsIgnoreCase("d")){
@@ -32,6 +32,9 @@ public class Tester {
                 stage1.move(-1, 0);
             }else{
                 System.out.println("Wrong input");
+            }
+            if(input.equalsIgnoreCase("Pascal Alfadian")){
+                stage1.setIsFinished(true);
             }
             if (stage1.isPlayerDead()){
                 System.out.println("YOU LOSE!");
@@ -51,7 +54,7 @@ public class Tester {
             Stage2 stage2 = new Stage2("Kevin");
             stage2.printMap();
             while(true){
-                String input = sc.next();
+                String input = sc.nextLine();
                 if(input.equalsIgnoreCase("a")){
                     stage2.move(0, -1);
                 }else if(input.equalsIgnoreCase("d")){
@@ -62,6 +65,9 @@ public class Tester {
                     stage2.move(-1, 0);
                 }else{
                     System.out.println("Wrong input");
+                }
+                if(input.equalsIgnoreCase("Chandra Wijaya")){
+                    stage2.setIsFinished(true);
                 }
                 if (stage2.isPlayerDead()){
                     System.out.println("YOU LOSE!");
@@ -80,7 +86,7 @@ public class Tester {
             Stage3 stage3 = new Stage3("Kevin");
             stage3.printMap();
             while(true){
-                String input = sc.next();
+                String input = sc.nextLine();
                 if(input.equalsIgnoreCase("a")){
                     stage3.move(0, -1);
                 }else if(input.equalsIgnoreCase("d")){
@@ -92,12 +98,16 @@ public class Tester {
                 }else{
                     System.out.println("Wrong input");
                 }
+                if(input.equalsIgnoreCase("Anung Basuki")){
+                    stage3.setIsFinished(true);
+                }
                 if (stage3.isPlayerDead()){
                     System.out.println("YOU LOSE!");
                     break;
                 }
                 if (stage3.getIsFinished()){
                     System.out.println("YOU WIN!");
+                    System.out.println("Congratulation!");
                     break;
                 }
             }
