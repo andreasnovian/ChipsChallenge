@@ -24,7 +24,7 @@ public abstract class Board {
         this.ScriptNeeded = scriptNeeded;
         this.player = new Player(name);
         this.mapBoard = new AbstractTile[15][15];
-        this.isFinished =false;
+        this.isFinished = false;
     }
     
     /**
@@ -99,47 +99,56 @@ public abstract class Board {
         
     /**
      * 
+     * @return 
      */
-    public void printMap(){
+    public String[][] printMap(){
+        String[][] map = new String[this.mapBoard.length][this.mapBoard[0].length];
         int positionX = this.player.getPosition().x;
         int positionY = this.player.getPosition().y;
         
         for(int i=0;i<this.mapBoard.length;i++){
             for(int j=0;j<this.mapBoard.length;j++){
                 if (positionX==i && positionY==j){
-                    System.out.print("P ");
+                    map[i][j] = "Player";
+                    System.out.print("P "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isDanger()){
-                    System.out.print("X ");
+                    map[i][j] = "Computer";
+                    System.out.print("X "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isBarrier()){
-                    System.out.print("B ");
+                    map[i][j] = "Barrier";
+                    System.out.print("B "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isDoor()){
                     Door door  = (Door)this.mapBoard[i][j];
-                    System.out.print(door.getColor()+ " ");
+                    map[i][j] = door.getColor();
+                    System.out.print(door.getColor()+ " "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isFinish()){
-                    System.out.print("F ");
+                    map[i][j] = "Finish";
+                    System.out.print("F "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isKey()){
                     Key key = (Key)this.mapBoard[i][j];
-                    System.out.print(key.getColorKey()+" ");
+                    map[i][j] = key.getColorKey();
+                    System.out.print(key.getColorKey()+" "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isWall()){
-                    System.out.print("W ");
+                    map[i][j] = "Wall";
+                    System.out.print("W "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isScript()){
-                    System.out.print("I ");
-                }
-                else if(this.mapBoard[i][j].isComputer()){
-                    System.out.print("V ");
+                    map[i][j] = "Script";
+                    System.out.print("I "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isTable()){
-                    System.out.print("T ");
+                    map[i][j] = "Table";
+                    System.out.print("T "); //hapus kalo udah jadi
                 }
                 else {
-                    System.out.print(". ");
+                    map[i][j] = "Blank";
+                    System.out.print(". "); //hapus kalo udah jadi
                 }
             }
             System.out.println("");
@@ -149,6 +158,8 @@ public abstract class Board {
             System.out.print(player.getKeysIndex(x)+" ");
         }
         System.out.println("");
+        
+        return map;
     }
     
     public boolean isPlayerDead(){

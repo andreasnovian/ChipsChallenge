@@ -1,7 +1,7 @@
 
 package GUI;
 
-import Tile.AbstractTile;
+import Game.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
@@ -15,15 +15,14 @@ import javax.swing.*;
 public class PanelTester extends JPanel{
     public static final int CANVAS_WIDTH = 600;
     public static final int CANVAS_HEIGHT = 600;
-    public AbstractTile[][] mapBoard;
     private Image[][] img;
-    private URL[] brianUrl,candraUrl,mantanUrl,mariskaUrl,pascalUrl,chairUrl,doorUrl,keyUrl,pcUrl,scriptUrl,tableUrl,wallUrl;
+    private Board board;
+    private URL[] brianUrl,candraUrl,mantanUrl,mariskaUrl,pascalUrl,chairUrl,doorUrl,keyUrl,pcUrl,scriptUrl,tableUrl,wallUrl,blankUrl;
     
     public PanelTester(){
         loadImage();
         setImage();
-        setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
-         
+        setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT)); 
     }
     
     private void loadImage(){
@@ -118,29 +117,50 @@ public class PanelTester extends JPanel{
         //Load image untuk wall
         wallUrl = new URL[1];
         wallUrl[0] = getClass().getClassLoader().getResource("GUI/Rooms/wall.png");
+        
+        //Load image untuk blankTile
+        blankUrl = new URL[1];
+        blankUrl[0] = getClass().getClassLoader().getResource("GUI/Rooms/blankTile.png");
     }
     
     private void setImage(){
         img  = new Image[15][15];
+        this.board = new Stage3("Kevin");
+        String[][] map = this.board.printMap();
         
         //Proses memasukkan gambar yang sudah diload ke array tile
         try{
         for (int i=0;i<15;i++){
             for (int j=0;j<15;j++){
-                if (i%5==0){
-                    img[i][j] = ImageIO.read(tableUrl[0]);
-                }
-                else if (i%5==1){
-                    img[i][j] = ImageIO.read(wallUrl[0]);
-                }
-                else if (i%5==2){
-                    img[i][j] = ImageIO.read(keyUrl[0]);
-                }
-                else if (i%5==3){
-                    img[i][j] = ImageIO.read(pcUrl[0]);
-                }
-                else {
-                    img[i][j] = ImageIO.read(scriptUrl[0]);
+                switch(map[i][j]){
+                    case "Player" : img[i][j] = ImageIO.read(brianUrl[1]);break;
+                    case "Computer" : img[i][j] = ImageIO.read(pcUrl[1]);break;
+                    case "Barrier" : img[i][j] = ImageIO.read(tableUrl[0]);break;
+                    case "Finish" : img[i][j] = ImageIO.read(chairUrl[0]);break;
+                    case "Wall" : img[i][j] = ImageIO.read(wallUrl[0]);break;
+                    case "Script" : img[i][j] = ImageIO.read(scriptUrl[0]);break;
+                    case "Table" : img[i][j] = ImageIO.read(tableUrl[0]);break;
+                    case "Blank" : img[i][j] = ImageIO.read(blankUrl[0]);break;
+                    case "A" : img[i][j] = ImageIO.read(doorUrl[0]);break;
+                    case "B" : img[i][j] = ImageIO.read(doorUrl[1]);break;
+                    case "C" : img[i][j] = ImageIO.read(doorUrl[2]);break;
+                    case "D" : img[i][j] = ImageIO.read(doorUrl[3]);break;
+                    case "E" : img[i][j] = ImageIO.read(doorUrl[4]);break;
+                    case "F" : img[i][j] = ImageIO.read(doorUrl[5]);break;
+                    case "G" : img[i][j] = ImageIO.read(doorUrl[6]);break;
+                    case "H" : img[i][j] = ImageIO.read(doorUrl[7]);break;
+                    case "I" : img[i][j] = ImageIO.read(doorUrl[8]);break;
+                    case "J" : img[i][j] = ImageIO.read(doorUrl[9]);break;
+                    case "a" : img[i][j] = ImageIO.read(keyUrl[0]);break;
+                    case "b" : img[i][j] = ImageIO.read(keyUrl[1]);break;
+                    case "c" : img[i][j] = ImageIO.read(keyUrl[2]);break;
+                    case "d" : img[i][j] = ImageIO.read(keyUrl[3]);break;
+                    case "e" : img[i][j] = ImageIO.read(keyUrl[4]);break;
+                    case "f" : img[i][j] = ImageIO.read(keyUrl[5]);break;
+                    case "g" : img[i][j] = ImageIO.read(keyUrl[6]);break;
+                    case "h" : img[i][j] = ImageIO.read(keyUrl[7]);break;
+                    case "i" : img[i][j] = ImageIO.read(keyUrl[8]);break;
+                    case "j" : img[i][j] = ImageIO.read(keyUrl[9]);break;
                 }
             }
         }
