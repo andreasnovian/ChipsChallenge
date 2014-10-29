@@ -20,6 +20,7 @@ public class Tester {
         boolean win = false;
         Stage1 stage1 = new Stage1("Kevin");
         stage1.printMap();
+        long start = System.currentTimeMillis();
         while(true){ 
             String input = sc.nextLine();
             if(input.equalsIgnoreCase("a")){
@@ -44,6 +45,9 @@ public class Tester {
             if (stage1.getIsFinished()){
                 System.out.println("YOU WIN!");
                 win =true;
+                long end = System.currentTimeMillis();
+                double time = (double)(end-start)/1000;
+                System.out.printf("Time = %.2f s \n",time);
                 break;
             }
         }

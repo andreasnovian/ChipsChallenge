@@ -174,9 +174,18 @@ public abstract class Board {
         isFinished = isFinish;
     }
     
-   public Point getPlayerPosition(){
+    public Point getPlayerPosition(){
         return player.getPosition();
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /**
      * 
