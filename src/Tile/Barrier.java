@@ -2,38 +2,18 @@
 package Tile;
 
 /**
- *
+ * Kelas yang merepresentasikan komponen tile Barrier dalam permainan
+ * Tile Barrier adalah komponen yang hanya bisa dilewati setelah player mengumpulkan semua script yang ada pada papan permainan
+ * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Barrier extends AbstractTile{
 
-    /**
-     * 
-     * @return 
-     */
     @Override
     public boolean isDanger() {
         return false;
     }
-        
-    /**
-     * 
-     * @param requireChip
-     * @param chips
-     * @return 
-     */
-    public boolean canStepBarrier(int level , int chips) {
-        if(level+5 == chips){
-            return true;
-        }else{
-            return false;
-        }
-    }
     
-    /**
-     * 
-     * @return 
-     */
     @Override
     public boolean isFinish() {
         return false;

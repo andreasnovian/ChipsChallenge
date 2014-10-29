@@ -1,10 +1,10 @@
 
 package Tile;
 
-import javax.swing.text.AbstractDocument;
-
 /**
- *
+ * Kelas yang merepresentasikan komponen tile table atau meja dalam permainan
+ * Tile table atau meja adalah komponen yang bisa dilewati dan akan menggantikan komponen key dan script ketika kedua komponen itu diinjak oleh pemain
+ * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Table extends AbstractTile{

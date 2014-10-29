@@ -2,8 +2,8 @@
 package Tile;
 
 /**
- * Kelas yang merepresentasikan tile lantai
- * Tile ini dapat dilewati tanpa syarat apapun
+ * Kelas yang merepresentasikan komponen blank tile dalam permainan
+ * Blank tile adalah komponen yang selalu bisa dilewati oleh player
  * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */

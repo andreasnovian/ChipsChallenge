@@ -2,8 +2,8 @@
 package Tile;
 
 /**
- * Kelas yang merepresentasikan tile Pintu 
- * Tile ini hanya dapat dilewati dengan kunci yang tepat
+ * Kelas yang merepresentasikan komponen tile door atau pintu dalam permainan
+ * Tile Door atau pintu adalah komponen yang hanya bisa dilewati setelah pemain mempunyai kunci yang sesuai untuk pintu yang akan dilewati
  * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */

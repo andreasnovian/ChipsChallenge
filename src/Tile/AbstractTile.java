@@ -2,8 +2,9 @@
 package Tile;
 
 /**
- * Kelas yang merepresentasikan komponen tile dalam permainan ini
+ * Kelas yang merepresentasikan komponen tile dalam permainan
  * Komponen yang dimaksud adalah komponen yang menyusun papan permainan kecuali pemain
+ * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public abstract class AbstractTile {
@@ -73,8 +74,8 @@ public abstract class AbstractTile {
     
     /**
      * Method untuk menentukan apakah tile merupakan tile table atau bukan
-     * Tile table atau meja adalah komponen yang bisa dilewati dan akan menggantikan komponen key dan script ketika 
-     * @return true jika merupakan tile computer dan false jika bukan
+     * Tile table atau meja adalah komponen yang bisa dilewati dan akan menggantikan komponen key dan script ketika kedua komponen itu diinjak oleh pemain
+     * @return true jika merupakan tile table dan false jika bukan
      */
     public abstract boolean isTable();
 }
