@@ -1,12 +1,12 @@
 
 package Game;
 
-import Tile.Key;
+import Tile.*;
 import java.awt.Point;
 import java.util.ArrayList;
 
 /**
- * Kelas yang merepresentasikan pemain dalam permainan ini
+ * Kelas yang merepresentasikan objek pemain pada papan permainan
  * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */

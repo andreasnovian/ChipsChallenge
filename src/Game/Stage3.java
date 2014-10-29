@@ -5,21 +5,17 @@ import Tile.*;
 import java.awt.Point;
 
 /**
- * Kelas Stage1 yang merepresentasikan level 1 dalam permainan ini
+ * Kelas yang merepresentasikan objek stage 3 pada papan permainan
+ * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Stage3 extends Board {
  
-    /**
-     * 
-     * @param name
-     */
     public Stage3(String name){
         super(8,name);
         player.setPosition(new Point(7, 1));
         this.setMapPosition();
     }
-    
     
     @Override
     protected void setWallMapPosition() {
@@ -114,11 +110,6 @@ public class Stage3 extends Board {
         mapBoard[11][4] = new Computer(0);
         mapBoard[13][4] = new Computer(0);
         mapBoard[13][10] = new Computer(0);
-    }
-
-    @Override
-    protected void setGirlFrienPosition() {
-        
     }
 
     @Override

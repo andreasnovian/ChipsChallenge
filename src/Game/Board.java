@@ -1,16 +1,12 @@
 
 package Game;
 
-import Tile.AbstractTile;
-import Tile.BlankTile;
-import Tile.Door;
-import Tile.Key;
-import Tile.Table;
-import Tile.Wall;
+import Tile.*;
 import java.awt.Point;
 
 /**
- *
+ * Kelas yang merepresentasikan papan permainan dalam permainan
+ * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public abstract class Board {
@@ -23,8 +19,8 @@ public abstract class Board {
     public Board(int scriptNeeded, String name){
         this.ScriptNeeded = scriptNeeded;
         this.player = new Player(name);
-        this.mapBoard = new AbstractTile[15][15];
         this.isFinished = false;
+        this.mapBoard = new AbstractTile[15][15];
     }
     
     /**
@@ -177,16 +173,7 @@ public abstract class Board {
     public Point getPlayerPosition(){
         return player.getPosition();
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     /**
      * 
      */
@@ -197,7 +184,6 @@ public abstract class Board {
         this.setComputerPosition();
         this.setDoorPosition();
         this.setFinishPosition();
-        this.setGirlFrienPosition();
         this.setKeyPosition();
         this.setScriptPosition();
         this.setTablePosition();
@@ -225,10 +211,8 @@ public abstract class Board {
     protected abstract void setDoorPosition();
     protected abstract void setKeyPosition();
     protected abstract void setComputerPosition();
-    protected abstract void setGirlFrienPosition();
     protected abstract void setScriptPosition();
     protected abstract void setBarrierPosition();
     protected abstract void setFinishPosition();
-    
-    
+       
 }

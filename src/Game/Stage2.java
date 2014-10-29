@@ -1,22 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Game;
 
-import Tile.Barrier;
-import Tile.Door;
-import Tile.Finish;
-import Tile.Computer;
-import Tile.Script;
-import Tile.Key;
-import Tile.Wall;
+import Tile.*;
 import java.awt.Point;
 
 /**
- *
+ * Kelas yang merepresentasikan objek stage 2 pada papan permainan
+ * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Stage2 extends Board{
@@ -113,11 +103,6 @@ public class Stage2 extends Board{
         mapBoard[13][3] = new Computer(1);
         mapBoard[13][9] = new Computer(2);
         mapBoard[10][5]= new Computer(2);
-    }
-
-    @Override
-    protected void setGirlFrienPosition() {
-        
     }
 
     @Override
