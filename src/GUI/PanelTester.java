@@ -125,7 +125,7 @@ public class PanelTester extends JPanel{
     
     private void setImage(){
         img  = new Image[15][15];
-        this.board = new Stage3("Kevin");
+        this.board = new Stage1("Kevin");
         String[][] map = this.board.printMap();
         
         //Proses memasukkan gambar yang sudah diload ke array tile

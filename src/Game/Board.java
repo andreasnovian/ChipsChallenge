@@ -23,11 +23,6 @@ public abstract class Board {
         this.mapBoard = new AbstractTile[15][15];
     }
     
-    /**
-     * 
-     * @param x
-     * @param y 
-     */
     public void move(int x , int y){
         int newX = (int)this.player.getPosition().getX()+x;
         int newY = (int)this.player.getPosition().getY()+y;
@@ -93,10 +88,6 @@ public abstract class Board {
         printMap();
     }
         
-    /**
-     * 
-     * @return 
-     */
     public String[][] printMap(){
         String[][] map = new String[this.mapBoard.length][this.mapBoard[0].length];
         int positionX = this.player.getPosition().x;
@@ -106,54 +97,54 @@ public abstract class Board {
             for(int j=0;j<this.mapBoard.length;j++){
                 if (positionX==i && positionY==j){
                     map[i][j] = "Player";
-                    System.out.print("P "); //hapus kalo udah jadi
+                    //System.out.print("P "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isDanger()){
                     map[i][j] = "Computer";
-                    System.out.print("X "); //hapus kalo udah jadi
+                    //System.out.print("X "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isBarrier()){
                     map[i][j] = "Barrier";
-                    System.out.print("B "); //hapus kalo udah jadi
+                    //System.out.print("B "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isDoor()){
                     Door door  = (Door)this.mapBoard[i][j];
                     map[i][j] = door.getColor();
-                    System.out.print(door.getColor()+ " "); //hapus kalo udah jadi
+                    //System.out.print(door.getColor()+ " "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isFinish()){
                     map[i][j] = "Finish";
-                    System.out.print("F "); //hapus kalo udah jadi
+                    //System.out.print("F "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isKey()){
                     Key key = (Key)this.mapBoard[i][j];
                     map[i][j] = key.getColorKey();
-                    System.out.print(key.getColorKey()+" "); //hapus kalo udah jadi
+                    //System.out.print(key.getColorKey()+" "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isWall()){
                     map[i][j] = "Wall";
-                    System.out.print("W "); //hapus kalo udah jadi
+                    //System.out.print("W "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isScript()){
                     map[i][j] = "Script";
-                    System.out.print("I "); //hapus kalo udah jadi
+                    //System.out.print("I "); //hapus kalo udah jadi
                 }
                 else if(this.mapBoard[i][j].isTable()){
                     map[i][j] = "Table";
-                    System.out.print("T "); //hapus kalo udah jadi
+                    //System.out.print("T "); //hapus kalo udah jadi
                 }
                 else {
                     map[i][j] = "Blank";
-                    System.out.print(". "); //hapus kalo udah jadi
+                    //System.out.print(". "); //hapus kalo udah jadi
                 }
             }
-            System.out.println("");
+            //System.out.println("");
         }
-        System.out.print("Player Keys : ");
-        for(int x = 0;x<player.getKeysLength();x++){
-            System.out.print(player.getKeysIndex(x)+" ");
-        }
-        System.out.println("");
+        //System.out.print("Player Keys : ");
+        //for(int x = 0;x<player.getKeysLength();x++){
+            //System.out.print(player.getKeysIndex(x)+" ");
+        //}
+        //System.out.println("");
         
         return map;
     }
@@ -174,9 +165,6 @@ public abstract class Board {
         return player.getPosition();
     }
 
-    /**
-     * 
-     */
     protected void setMapPosition(){
         this.setAllBlankTilePosition();
         this.setWallBorderPosition();
