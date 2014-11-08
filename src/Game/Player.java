@@ -64,6 +64,4 @@ public class Player {
     public void setPosition(Point position) {
         this.position = position;
     }
-    
-    
 }
