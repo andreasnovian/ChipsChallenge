@@ -1,17 +1,20 @@
-
 package Tile;
 
 /**
- * Kelas yang merepresentasikan komponen tile computer dalam permainan
- * Tile computer adalah komponen yang akan mengakhiri permainan dan membuat pemain kalah jika diinjak
- * 
+ * Kelas yang merepresentasikan komponen tile computer dalam permainan Tile
+ * computer adalah komponen yang akan mengakhiri permainan dan membuat pemain
+ * kalah jika diinjak
+ *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
-public class Computer extends AbstractTile{
+public class Computer extends AbstractTile {
+
     private int computerPosition;
-    public Computer(int pos){
-        this.computerPosition=pos;
+
+    public Computer(int pos) {
+        this.computerPosition = pos;
     }
+
     @Override
     public boolean isDanger() {
         return true;
@@ -21,7 +24,7 @@ public class Computer extends AbstractTile{
     public boolean canBeStepped() {
         return true;
     }
-    
+
     @Override
     public boolean isScript() {
         return false;
@@ -41,7 +44,7 @@ public class Computer extends AbstractTile{
     public boolean isDoor() {
         return false;
     }
-    
+
     @Override
     public boolean isKey() {
         return false;
@@ -51,8 +54,8 @@ public class Computer extends AbstractTile{
     public boolean isWall() {
         return false;
     }
-    
-    public int getPost(){
+
+    public int getPost() {
         return computerPosition;
     }
 
@@ -63,6 +66,11 @@ public class Computer extends AbstractTile{
 
     @Override
     public boolean isTable() {
+        return false;
+    }
+
+    @Override
+    public boolean isWater() {
         return false;
     }
 }

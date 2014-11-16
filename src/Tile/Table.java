@@ -59,4 +59,9 @@ public class Table extends AbstractTile{
         return true;
     }
     
+    @Override
+    public boolean isWater() {
+        return false;
+    }
+    
 }

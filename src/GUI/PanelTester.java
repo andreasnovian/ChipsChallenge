@@ -17,7 +17,6 @@ public class PanelTester extends JPanel implements KeyListener {
     public static final int CANVAS_WIDTH = 600;
     public static final int CANVAS_HEIGHT = 600;
     private Image[][] img = new Image[15][15];
-    ;
     private Board board;
     private URL[] brianUrl, candraUrl, mantanUrl, mariskaUrl, pascalUrl, chairUrl, doorUrl, keyUrl, pcUrl, scriptUrl, tableUrl, wallUrl, blankUrl;
 

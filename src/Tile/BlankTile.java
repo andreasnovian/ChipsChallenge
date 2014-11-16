@@ -59,4 +59,9 @@ public class BlankTile extends AbstractTile{
         return false;
     }
     
+    @Override
+    public boolean isWater() {
+        return false;
+    }
+    
 }

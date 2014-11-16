@@ -73,6 +73,13 @@ public abstract class AbstractTile {
     public abstract boolean isComputer();
     
     /**
+     * Method untuk menentukan apakah tile merupakan tile water atau bukan
+     * Tile water adalah komponen yang akan mengakhiri permainan dan membuat pemain kalah jika diinjak
+     * @return true jika merupakan tile water dan false jika bukan
+     */
+    public abstract boolean isWater();
+    
+    /**
      * Method untuk menentukan apakah tile merupakan tile table atau bukan
      * Tile table atau meja adalah komponen yang bisa dilewati dan akan menggantikan komponen key dan script ketika kedua komponen itu diinjak oleh pemain
      * @return true jika merupakan tile table dan false jika bukan

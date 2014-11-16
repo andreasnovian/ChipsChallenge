@@ -68,5 +68,10 @@ public class Door extends AbstractTile{
     public boolean isTable() {
         return false;
     }
+    
+    @Override
+    public boolean isWater() {
+        return false;
+    }
        
 }
