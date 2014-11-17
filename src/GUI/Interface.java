@@ -1,19 +1,25 @@
-
 package GUI;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
-public class Interface extends javax.swing.JFrame {
+public class Interface extends javax.swing.JFrame implements KeyListener{
 
+    private PanelTester panel;
+    
     /**
      * Creates new form Interface
      */
     public Interface() {
         initComponents();
-        this.jInternalFrame1.setContentPane(new PanelTester());
+        addKeyListener(this);
+        setFocusable(true);
         this.setSize(900, 680);
+        this.jInternalFrame1.setContentPane(new welcomePanel());
     }
 
     /**
@@ -94,7 +100,7 @@ public class Interface extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 271, Short.MAX_VALUE)
+            .addGap(0, 287, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,10 +139,10 @@ public class Interface extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,9 +171,8 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel3)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,7 +191,8 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_pauseButtonActionPerformed
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        
+        this.panel = new PanelTester (this,1);
+        this.jInternalFrame1.setContentPane(panel);
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     /**
@@ -242,4 +248,29 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton restartButton;
     private javax.swing.JProgressBar timeProgress;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+        int code = ke.getKeyCode();
+
+        if (code == KeyEvent.VK_LEFT) {
+            panel.move(0, -1);
+        } else if (code == KeyEvent.VK_UP) {
+            panel.move(-1, 0);
+        } else if (code == KeyEvent.VK_RIGHT) {
+            panel.move(0, 1);
+        } else if (code == KeyEvent.VK_DOWN) {
+            panel.move(1, 0);
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

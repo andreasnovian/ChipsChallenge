@@ -10,9 +10,9 @@ import javax.swing.*;
 
 /**
  *
- * @author Andreas Novian
+ * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
-public class PanelTester extends JPanel implements KeyListener {
+public class PanelTester extends JPanel{
 
     public static final int CANVAS_WIDTH = 600;
     public static final int CANVAS_HEIGHT = 600;
@@ -20,12 +20,20 @@ public class PanelTester extends JPanel implements KeyListener {
     private Board board;
     private URL[] brianUrl, candraUrl, mantanUrl, mariskaUrl, pascalUrl, chairUrl, doorUrl, keyUrl, pcUrl, scriptUrl, tableUrl, wallUrl, blankUrl;
 
-    public PanelTester() {
-        this.board = new Stage1("Kevin");
+    public PanelTester(Interface view, int stage) {
+        switch (stage) {
+            case 1:
+                this.board = new Stage1(view, "Kevin");
+                break;
+            case 2:
+                this.board = new Stage2(view, "Kevin");
+                break;
+            case 3:
+                this.board = new Stage3(view, "Kevin");
+                break;
+        }
         this.loadImage();
         this.setImage();
-        addKeyListener(this);
-        setFocusable(true);
         setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
     }
 
@@ -245,28 +253,10 @@ public class PanelTester extends JPanel implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent ke) {
-        int code = ke.getKeyCode();
-
-        if (code == KeyEvent.VK_LEFT) {
-            board.move(0, -1);
-        } else if (code == KeyEvent.VK_UP) {
-            board.move(-1, 0);
-        } else if (code == KeyEvent.VK_RIGHT) {
-            board.move(0, 1);
-        } else if (code == KeyEvent.VK_DOWN) {
-            board.move(1, 0);
-        }
+    public void move(int x, int y) {
+        board.move(x, y);
         setImage();
         repaint();
-    }
-
-    @Override
-    public void keyTyped(KeyEvent ke) {
-    }
-
-    @Override
-    public void keyReleased(KeyEvent ke) {
     }
 
 }

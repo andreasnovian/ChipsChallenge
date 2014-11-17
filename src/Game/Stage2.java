@@ -1,50 +1,77 @@
-
 package Game;
 
+import GUI.Interface;
 import Tile.*;
 import java.awt.Point;
 
 /**
  * Kelas yang merepresentasikan objek stage 2 pada papan permainan
- * 
+ *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
-public class Stage2 extends Board{
+public class Stage2 extends Board {
 
-    public Stage2(String name) {
-        super(7, name);
+    public Stage2(Interface view, String name) {
+        super(view, 7, name);
         player.setPosition(new Point(11, 1));
         this.setMapPosition();
     }
 
     @Override
     protected void setWallMapPosition() {
-        mapBoard[1][4] = new Wall();mapBoard[1][8] = new Wall();mapBoard[1][12] = new Wall();mapBoard[1][13] = new Wall();
-        mapBoard[2][2] = new Wall();mapBoard[2][10] = new Wall();
-        for(int i=1;i<6;i++){
+        mapBoard[1][4] = new Wall();
+        mapBoard[1][8] = new Wall();
+        mapBoard[1][12] = new Wall();
+        mapBoard[1][13] = new Wall();
+        mapBoard[2][2] = new Wall();
+        mapBoard[2][10] = new Wall();
+        for (int i = 1; i < 6; i++) {
             mapBoard[3][i] = new Wall();
         }
-        for(int i=7;i<13;i++){
+        for (int i = 7; i < 13; i++) {
             mapBoard[3][i] = new Wall();
         }
         mapBoard[4][5] = new Wall();
         mapBoard[4][9] = new Wall();
-        for(int i=2;i<13;i++){
+        for (int i = 2; i < 13; i++) {
             mapBoard[5][i] = new Wall();
         }
-        mapBoard[6][2] = new Wall();mapBoard[6][5] = new Wall();mapBoard[6][8] = new Wall();mapBoard[6][12] = new Wall();
-        mapBoard[7][2] = new Wall();mapBoard[7][4] = new Wall();mapBoard[7][5] = new Wall();mapBoard[7][6] = new Wall();mapBoard[7][8] = new Wall();mapBoard[7][10] = new Wall();mapBoard[7][11] = new Wall();mapBoard[7][12] = new Wall();
+        mapBoard[6][2] = new Wall();
+        mapBoard[6][5] = new Wall();
+        mapBoard[6][8] = new Wall();
+        mapBoard[6][12] = new Wall();
+        mapBoard[7][2] = new Wall();
+        mapBoard[7][4] = new Wall();
+        mapBoard[7][5] = new Wall();
+        mapBoard[7][6] = new Wall();
+        mapBoard[7][8] = new Wall();
+        mapBoard[7][10] = new Wall();
+        mapBoard[7][11] = new Wall();
+        mapBoard[7][12] = new Wall();
         mapBoard[8][2] = new Wall();
-        mapBoard[9][2] = new Wall();mapBoard[9][4] = new Wall();mapBoard[9][5] = new Wall();mapBoard[9][6] = new Wall();mapBoard[9][8] = new Wall();mapBoard[9][10] = new Wall();mapBoard[9][11] = new Wall();mapBoard[9][12] = new Wall();
-        mapBoard[10][2] = new Wall();mapBoard[10][4] = new Wall();mapBoard[10][8] = new Wall();mapBoard[10][12] = new Wall();
-        for(int i=4;i<13;i++){
+        mapBoard[9][2] = new Wall();
+        mapBoard[9][4] = new Wall();
+        mapBoard[9][5] = new Wall();
+        mapBoard[9][6] = new Wall();
+        mapBoard[9][8] = new Wall();
+        mapBoard[9][10] = new Wall();
+        mapBoard[9][11] = new Wall();
+        mapBoard[9][12] = new Wall();
+        mapBoard[10][2] = new Wall();
+        mapBoard[10][4] = new Wall();
+        mapBoard[10][8] = new Wall();
+        mapBoard[10][12] = new Wall();
+        for (int i = 4; i < 13; i++) {
             mapBoard[11][i] = new Wall();
         }
-        mapBoard[12][2] = new Wall();mapBoard[12][6] = new Wall();mapBoard[12][12] = new Wall();
+        mapBoard[12][2] = new Wall();
+        mapBoard[12][6] = new Wall();
+        mapBoard[12][12] = new Wall();
         mapBoard[12][11] = new Wall();
-        mapBoard[13][2] = new Wall();mapBoard[13][4] = new Wall();mapBoard[13][8] = new Wall();
+        mapBoard[13][2] = new Wall();
+        mapBoard[13][4] = new Wall();
+        mapBoard[13][8] = new Wall();
     }
-    
 
     @Override
     protected void setDoorPosition() {
@@ -94,7 +121,7 @@ public class Stage2 extends Board{
 
     @Override
     protected void setTablePosition() {
-        
+
     }
 
     @Override
@@ -102,7 +129,7 @@ public class Stage2 extends Board{
         mapBoard[2][1] = new Computer(1);
         mapBoard[13][3] = new Computer(1);
         mapBoard[13][9] = new Computer(2);
-        mapBoard[10][5]= new Computer(2);
+        mapBoard[10][5] = new Computer(2);
     }
 
     @Override
@@ -115,5 +142,5 @@ public class Stage2 extends Board{
         mapBoard[12][1] = new Script();
         mapBoard[12][9] = new Script();
     }
-    
+
 }

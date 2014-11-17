@@ -1,22 +1,22 @@
-
 package Game;
 
+import GUI.Interface;
 import Tile.*;
 import java.awt.Point;
 
 /**
  * Kelas yang merepresentasikan objek stage 3 pada papan permainan
- * 
+ *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class Stage3 extends Board {
- 
-    public Stage3(String name){
-        super(8,name);
+
+    public Stage3(Interface view, String name) {
+        super(view, 8, name);
         player.setPosition(new Point(7, 1));
         this.setMapPosition();
     }
-    
+
     @Override
     protected void setWallMapPosition() {
         mapBoard[1][2] = new Wall();
@@ -84,7 +84,7 @@ public class Stage3 extends Board {
         mapBoard[13][1] = new Key("f");
         mapBoard[12][13] = new Key("h");
     }
-    
+
     @Override
     protected void setBarrierPosition() {
         mapBoard[6][12] = new Barrier();
@@ -97,7 +97,7 @@ public class Stage3 extends Board {
 
     @Override
     protected void setTablePosition() {
-        
+
     }
 
     @Override
@@ -123,6 +123,5 @@ public class Stage3 extends Board {
         mapBoard[12][1] = new Script();
         mapBoard[13][13] = new Script();
     }
-     
-     
+
 }

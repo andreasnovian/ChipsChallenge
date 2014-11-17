@@ -1,40 +1,79 @@
-
 package Game;
 
+import GUI.Interface;
 import Tile.*;
 import java.awt.Point;
 
 /**
  * Kelas yang merepresentasikan objek stage 1 pada papan permainan
- * 
+ *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
-public class Stage1 extends Board{
+public class Stage1 extends Board {
 
-    public Stage1(String name) {
-        super(6, name);
+    public Stage1(Interface view, String name) {
+        super(view, 6, name);
         player.setPosition(new Point(9, 1));
         this.setMapPosition();
     }
 
     @Override
     protected void setWallMapPosition() {
-        mapBoard[1][3] = new Wall();mapBoard[1][6] = new Wall();
-        mapBoard[2][2] = new Wall();mapBoard[2][3] = new Wall();mapBoard[2][6] = new Wall();mapBoard[2][7] = new Wall();mapBoard[2][8] = new Wall();mapBoard[2][10] = new Wall();mapBoard[2][12] = new Wall();
-        mapBoard[3][6] = new Wall();mapBoard[3][10] = new Wall();mapBoard[3][12] = new Wall();
-        mapBoard[4][2] = new Wall();mapBoard[4][3] = new Wall();mapBoard[4][6] = new Wall();mapBoard[4][7] = new Wall();mapBoard[4][8] = new Wall();mapBoard[4][9] = new Wall();mapBoard[4][10] = new Wall();mapBoard[4][11] = new Wall();mapBoard[4][12] = new Wall();
-        mapBoard[5][3] = new Wall();mapBoard[5][6] = new Wall();mapBoard[5][10] = new Wall();mapBoard[5][12] = new Wall();
-        mapBoard[6][1] = new Wall();mapBoard[6][2] = new Wall();mapBoard[6][3] = new Wall();mapBoard[6][6] = new Wall();mapBoard[6][7] = new Wall();mapBoard[6][8] = new Wall();mapBoard[6][10] = new Wall();mapBoard[6][12] = new Wall();
+        mapBoard[1][3] = new Wall();
+        mapBoard[1][6] = new Wall();
+        mapBoard[2][2] = new Wall();
+        mapBoard[2][3] = new Wall();
+        mapBoard[2][6] = new Wall();
+        mapBoard[2][7] = new Wall();
+        mapBoard[2][8] = new Wall();
+        mapBoard[2][10] = new Wall();
+        mapBoard[2][12] = new Wall();
+        mapBoard[3][6] = new Wall();
+        mapBoard[3][10] = new Wall();
+        mapBoard[3][12] = new Wall();
+        mapBoard[4][2] = new Wall();
+        mapBoard[4][3] = new Wall();
+        mapBoard[4][6] = new Wall();
+        mapBoard[4][7] = new Wall();
+        mapBoard[4][8] = new Wall();
+        mapBoard[4][9] = new Wall();
+        mapBoard[4][10] = new Wall();
+        mapBoard[4][11] = new Wall();
+        mapBoard[4][12] = new Wall();
+        mapBoard[5][3] = new Wall();
+        mapBoard[5][6] = new Wall();
+        mapBoard[5][10] = new Wall();
+        mapBoard[5][12] = new Wall();
+        mapBoard[6][1] = new Wall();
+        mapBoard[6][2] = new Wall();
+        mapBoard[6][3] = new Wall();
+        mapBoard[6][6] = new Wall();
+        mapBoard[6][7] = new Wall();
+        mapBoard[6][8] = new Wall();
+        mapBoard[6][10] = new Wall();
+        mapBoard[6][12] = new Wall();
         mapBoard[8][6] = new Wall();
-        mapBoard[9][6] = new Wall();mapBoard[9][7] = new Wall();mapBoard[9][8] = new Wall();mapBoard[9][9] = new Wall();mapBoard[9][11] = new Wall();mapBoard[9][12] = new Wall();mapBoard[9][13] = new Wall();
-        mapBoard[10][6] = new Wall();mapBoard[10][8] = new Wall();mapBoard[10][12] = new Wall();
-        mapBoard[11][6] = new Wall();mapBoard[11][12] = new Wall();
-        mapBoard[12][6] = new Wall();mapBoard[12][6] = new Wall();mapBoard[12][8] = new Wall();mapBoard[12][9] = new Wall();mapBoard[12][10] = new Wall();mapBoard[12][11] = new Wall();mapBoard[12][12] = new Wall();
+        mapBoard[9][6] = new Wall();
+        mapBoard[9][7] = new Wall();
+        mapBoard[9][8] = new Wall();
+        mapBoard[9][9] = new Wall();
+        mapBoard[9][11] = new Wall();
+        mapBoard[9][12] = new Wall();
+        mapBoard[9][13] = new Wall();
+        mapBoard[10][6] = new Wall();
+        mapBoard[10][8] = new Wall();
+        mapBoard[10][12] = new Wall();
+        mapBoard[11][6] = new Wall();
+        mapBoard[11][12] = new Wall();
+        mapBoard[12][6] = new Wall();
+        mapBoard[12][6] = new Wall();
+        mapBoard[12][8] = new Wall();
+        mapBoard[12][9] = new Wall();
+        mapBoard[12][10] = new Wall();
+        mapBoard[12][11] = new Wall();
+        mapBoard[12][12] = new Wall();
         mapBoard[13][6] = new Wall();
-        
-        
-        
-        
+
     }
 
     @Override
@@ -77,7 +116,7 @@ public class Stage1 extends Board{
 
     @Override
     protected void setTablePosition() {
-        
+
     }
 
     @Override
@@ -106,5 +145,5 @@ public class Stage1 extends Board{
         mapBoard[12][3] = new Script();
         mapBoard[13][12] = new Script();
     }
-    
+
 }
