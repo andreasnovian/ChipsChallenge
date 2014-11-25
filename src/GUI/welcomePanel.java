@@ -12,12 +12,19 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- *
+ * 
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class welcomePanel extends JPanel {
 
+    /**
+     * Atribut untuk menyimpan alamat gambar untuk halaman awal
+     */
     private URL imageUrl;
+    
+    /**
+     * Atribut untuk menyimpan objek Image gambar untuk halaman awal
+     */
     private Image img;
 
     public welcomePanel() {

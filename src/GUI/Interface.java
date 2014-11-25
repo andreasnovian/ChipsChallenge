@@ -163,15 +163,8 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Method sebagai pemroses tombol yang ditekan
-     *
-     * @param evt
-     */
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            System.out.println("aaaa");
-        }
+
     }//GEN-LAST:event_formKeyPressed
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
@@ -186,14 +179,29 @@ public class Interface extends javax.swing.JFrame {
         this.jInternalFrame1.setContentPane(this.panel);
     }//GEN-LAST:event_restartButtonActionPerformed
 
+    /**
+     * Method untuk menuliskan kunci yang dimiliki player ke dalam
+     * playerKeysField
+     *
+     * @param key kunci yang dimiliki player dalam String
+     */
     public void printPlayerKeys(String key) {
         playerKeysField.setText(key);
     }
 
+    /**
+     * Method untuk menuliskan sisa script yang harus dikumpulkan player ke
+     * dalam scriptLeftLabel
+     *
+     * @param scriptLeft sisa script yang harus dikumpulkan oleh player
+     */
     public void printScriptLeft(int scriptLeft) {
         this.scriptLeftLabel.setText("Script Left : " + scriptLeft);
     }
 
+    /**
+     * Method untuk menambahkan atribut curStage sebanyak 1
+     */
     public void nextStage() {
         this.curStage++;
     }

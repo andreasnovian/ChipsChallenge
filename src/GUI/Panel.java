@@ -183,15 +183,12 @@ public class Panel extends JPanel implements KeyListener {
                 switch (map[i][j]) {
                     case "Player":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(playerUrl[this.posPlayer]);
-                        //img[i][j] = ImageIO.read(playerUrl[this.posPlayer]);
                         break;
                     case "Tile.Computer":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(computerUrl[0]);
-                        //img[i][j] = ImageIO.read(computerUrl[0]);
                         break;
                     case "Tile.Barrier":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(barrierUrl[0]);
-                        //img[i][j] = ImageIO.read(barrierUrl[0]);
                         break;
                     case "Tile.Finish":
                         if (this.stage == 1) {
@@ -201,143 +198,108 @@ public class Panel extends JPanel implements KeyListener {
                         } else if (this.stage == 3) {
                             img[i][j] = Toolkit.getDefaultToolkit().getImage(finishUrl[11]);
                         }
-                        //img[i][j] = ImageIO.read(finishUrl[5]);
                         break;
                     case "Tile.Wall":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(wallUrl[0]);
-                        //img[i][j] = ImageIO.read(wallUrl[0]);
                         break;
                     case "Tile.Script":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(scriptUrl[0]);
-                        //img[i][j] = ImageIO.read(scriptUrl[0]);
                         break;
                     case "Tile.BlankTile":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(blankTileUrl[0]);
-                        //img[i][j] = ImageIO.read(blankTileUrl[0]);
                         break;
                     case "Tile.DeadElectricity":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(deadElectricityUrl[0]);
-                        //img[i][j] = ImageIO.read(deadElectricityUrl[0]);
                         break;
                     case "Tile.ExGirlfriend":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(exGirlfriendUrl[0]);
-                        //img[i][j] = ImageIO.read(exGirlfriendUrl[0]);
                         break;
                     case "Tile.Peace":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(peaceUrl[0]);
-                        //img[i][j] = ImageIO.read(peaceUrl[0]);
                         break;
                     case "A":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[0]);
-                        //img[i][j] = ImageIO.read(doorUrl[0]);
                         break;
                     case "B":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[1]);
-                        //img[i][j] = ImageIO.read(doorUrl[1]);
                         break;
                     case "C":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[2]);
-                        //img[i][j] = ImageIO.read(doorUrl[2]);
                         break;
                     case "D":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[3]);
-                        //img[i][j] = ImageIO.read(doorUrl[3]);
                         break;
                     case "E":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[4]);
-                        //img[i][j] = ImageIO.read(doorUrl[4]);
                         break;
                     case "F":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[5]);
-                        //img[i][j] = ImageIO.read(doorUrl[5]);
                         break;
                     case "G":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[6]);
-                        //img[i][j] = ImageIO.read(doorUrl[6]);
                         break;
                     case "H":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[7]);
-                        //img[i][j] = ImageIO.read(doorUrl[7]);
                         break;
                     case "I":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[8]);
-                        //img[i][j] = ImageIO.read(doorUrl[8]);
                         break;
                     case "J":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[9]);
-                        //img[i][j] = ImageIO.read(doorUrl[9]);
                         break;
                     case "K":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[10]);
-                        //img[i][j] = ImageIO.read(doorUrl[9]);
                         break;
                     case "L":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[11]);
-                        //img[i][j] = ImageIO.read(doorUrl[9]);
                         break;
                     case "M":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[12]);
-                        //img[i][j] = ImageIO.read(doorUrl[9]);
                         break;
                     case "N":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(doorUrl[13]);
-                        //img[i][j] = ImageIO.read(doorUrl[9]);
                         break;
                     case "a":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[0]);
-                        //img[i][j] = ImageIO.read(keyUrl[0]);
                         break;
                     case "b":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[1]);
-                        //img[i][j] = ImageIO.read(keyUrl[1]);
                         break;
                     case "c":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[2]);
-                        //img[i][j] = ImageIO.read(keyUrl[2]);
                         break;
                     case "d":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[3]);
-                        //img[i][j] = ImageIO.read(keyUrl[3]);
                         break;
                     case "e":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[4]);
-                        //img[i][j] = ImageIO.read(keyUrl[4]);
                         break;
                     case "f":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[5]);
-                        //img[i][j] = ImageIO.read(keyUrl[5]);
                         break;
                     case "g":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[6]);
-                        //img[i][j] = ImageIO.read(keyUrl[6]);
                         break;
                     case "h":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[7]);
-                        //img[i][j] = ImageIO.read(keyUrl[7]);
                         break;
                     case "i":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[8]);
-                        //img[i][j] = ImageIO.read(keyUrl[8]);
                         break;
                     case "j":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[9]);
-                        //img[i][j] = ImageIO.read(keyUrl[9]);
                         break;
                     case "k":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[10]);
-                        //img[i][j] = ImageIO.read(keyUrl[9]);
                         break;
                     case "l":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[11]);
-                        //img[i][j] = ImageIO.read(keyUrl[9]);
                         break;
                     case "m":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[12]);
-                        //img[i][j] = ImageIO.read(keyUrl[9]);
                         break;
                     case "n":
                         img[i][j] = Toolkit.getDefaultToolkit().getImage(keyUrl[13]);
-                        //img[i][j] = ImageIO.read(keyUrl[9]);
                         break;
                 }
             }
@@ -345,6 +307,10 @@ public class Panel extends JPanel implements KeyListener {
 
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g) {
         this.g = g;
@@ -363,20 +329,15 @@ public class Panel extends JPanel implements KeyListener {
         repaint();
         if (board.isPlayerAlive()) {
             if (board.isPlayerWin()) {
-                try {
-                    this.g.setColor(Color.black);
-                    this.g.fillRect(0, 0, 600, 600);
-                    Font font = new Font("Trebuchet MS", Font.PLAIN, 30);
-                    this.g.setFont(font);
-                    this.g.setColor(Color.white);
-                    this.g.drawString("Level Completed !", 175, 250);
-                    this.g.drawString("Press [ENTER] to continue", 125, 280);
-                    Thread.sleep(1000);
-                    System.out.println("Next Stage 2");
-                    //Stage2 st2 = new Stage2(view);
-                } catch (InterruptedException ex) {
-                    System.out.println("Error next Stage");
-                }
+                this.g.setColor(Color.black);
+                this.g.fillRect(0, 0, 600, 600);
+                Font font = new Font("Trebuchet MS", Font.PLAIN, 30);
+                this.g.setFont(font);
+                this.g.setColor(Color.white);
+                this.g.drawString("LEVEL COMPLETED !", 175, 300);
+                font = new Font("Trebuchet MS", Font.PLAIN, 30);
+                this.g.setFont(font);
+                this.g.drawString("PRESS [ENTER] TO EXIT", 155, 330);
             }
         }
         if (!board.isPlayerAlive()) {
@@ -386,14 +347,25 @@ public class Panel extends JPanel implements KeyListener {
             this.g.setFont(font);
             this.g.setColor(Color.white);
             this.g.drawString("GAME OVER !", 125, 300);
+            font = new Font("Trebuchet MS", Font.PLAIN, 30);
+            this.g.setFont(font);
+            this.g.drawString("PRESS [ENTER] TO EXIT", 145, 360);
         }
     }
 
+    /**
+     *
+     * @param ke
+     */
     @Override
     public void keyTyped(KeyEvent ke) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param ke
+     */
     @Override
     public void keyPressed(KeyEvent ke) {
         int code = ke.getKeyCode();
@@ -427,11 +399,17 @@ public class Panel extends JPanel implements KeyListener {
                 posPlayer = 3;
             }
         }
-
+        if (code == KeyEvent.VK_ENTER) {
+            view.dispose();
+        }
         setImage();
         repaint();
     }
 
+    /**
+     *
+     * @param ke
+     */
     @Override
     public void keyReleased(KeyEvent ke) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
