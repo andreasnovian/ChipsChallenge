@@ -162,7 +162,6 @@ public class Stage2 extends Board {
         }
         mapBoard[12][2] = new Wall();
         mapBoard[12][6] = new Wall();
-        mapBoard[12][12] = new Wall();
         mapBoard[12][11] = new Wall();
         mapBoard[13][2] = new Wall();
         mapBoard[13][4] = new Wall();

@@ -17,7 +17,7 @@ public abstract class Board {
      * diberitahu jika terjadi perubahan pada papan permainan yang mengharuskan
      * perubahan pada tampilan visual
      */
-    private Interface view;
+    private final Interface view;
 
     /**
      * Atribut scriptNeeded untuk menyimpan jumlah script yang harus dikumpulkan
@@ -36,6 +36,10 @@ public abstract class Board {
      */
     protected Player player;
 
+    /**
+     * Atribut playerNowOn untuk menyimpan objek Tile yang sedang diinjak player
+     * saat ini
+     */
     private String playerNowOn;
 
     /**
@@ -63,27 +67,29 @@ public abstract class Board {
      */
     public void move(int x, int y) {
         /**
-         * Membuat atribut Lokal bertipe data int yang berupa posisi baru
-         * setelah menerima input terbaru (axis X)
+         * Atribut newY bertipe int untuk menyimpan posisi yang akan diinjak
+         * player dalam koordinat x
          */
         int newX = (int) this.player.getPosition().getX() + x;
 
         /**
-         * Membuat atribut Lokal bertipe data int yang berupa posisi baru
-         * setelah menerima input terbaru (axis Y)
+         * Atribut newY bertipe int untuk menyimpan posisi yang akan diinjak
+         * player dalam koordinat y
          */
         int newY = (int) this.player.getPosition().getY() + y;
 
         /**
-         * Membuat atribut Lokal bertipe data point dengan parameter newX dan
-         * newY yang sudah dibuat
+         * Atribut newPosition bertipe Point dengan parameter newX dan newY
+         * untuk menyimpan posisi yang akan diinjak player
          */
         Point newPosition = new Point(newX, newY);
 
         /**
-         *
+         * Atribut tileName bertipe String untuk menyimpan nama kelas dari objek
+         * Tile yang akan diinjak player
          */
         String tileName = mapBoard[newX][newY].getClass().getName();
+
         /**
          * Cek apakah mapboard[newX][newY] dapat dilewati atau tidak Jika dapat
          * dilewati cek kemungkinan selanjutnya Jika tidak posisi player tetap
@@ -97,7 +103,7 @@ public abstract class Board {
             if (this.mapBoard[newX][newY].isDanger()) {
                 this.player.setPosition(newPosition);
                 this.player.kill();
-                this.playerNowOn="Danger";
+                this.playerNowOn = "Danger";
             } else {
                 /**
                  * Cek player berada di posisi Barrier Player dapat menembus
@@ -108,7 +114,7 @@ public abstract class Board {
                     if (this.player.getScript() == scriptNeeded) {
                         this.mapBoard[newX][newY] = new BlankTile();
                         this.player.setPosition(newPosition);
-                        this.playerNowOn="Barrier";
+                        this.playerNowOn = "Barrier";
                     }
                 } /**
                  * Cek player berada di posisi BlankTile Posisi player diset ke
@@ -116,7 +122,7 @@ public abstract class Board {
                  */
                 else if (tileName.equalsIgnoreCase("Tile.BlankTile")) {
                     this.player.setPosition(newPosition);
-                    this.playerNowOn="BlankTile";
+                    this.playerNowOn = "BlankTile";
                 } /**
                  * Cek player berada di DeadElectricity Semua komputer yang
                  * sebelumnya berbahaya jika dilewati , akan menjadi tidak
@@ -129,13 +135,13 @@ public abstract class Board {
                                 Computer temp = (Computer) this.mapBoard[i][j];
                                 temp.makeItSafe();
                                 this.mapBoard[i][j] = temp;
-                                this.playerNowOn="Computer";
+                                this.playerNowOn = "Computer";
                             }
                         }
                     }
                     this.player.setPosition(newPosition);
                     this.mapBoard[newX][newY] = new BlankTile();
-                    this.playerNowOn="DeadElectricity";
+                    this.playerNowOn = "DeadElectricity";
                 } /**
                  * Cek player berada di posisi door Player dapat membuka pintu
                  * jika kunci yang dimiliki sesuai dengan pintu
@@ -146,7 +152,7 @@ public abstract class Board {
                         if (tempDoor.getColor().equalsIgnoreCase(this.player.getKey(i).getColor())) {
                             this.mapBoard[newX][newY] = new BlankTile();
                             this.player.setPosition(newPosition);
-                            this.playerNowOn="Door";
+                            this.playerNowOn = "Door";
                         }
                     }
                 } /**
@@ -157,7 +163,8 @@ public abstract class Board {
                     if (this.player.getScript() == scriptNeeded) {
                         this.player.setPosition(newPosition);
                         this.player.win();
-                        this.playerNowOn="Finish";
+                        this.view.nextStage();
+                        this.playerNowOn = "Finish";
                     }
                 } /**
                  * Cek player jika berada di Key Key akan ditambahkan ke
@@ -169,7 +176,7 @@ public abstract class Board {
                     this.mapBoard[newX][newY] = new BlankTile();
                     this.player.setPosition(newPosition);
                     view.printPlayerKeys(player.getAllKey());
-                    this.playerNowOn="Key";
+                    this.playerNowOn = "Key";
                 } /**
                  * Cek player berada di Peace Semua ExGirlFriend yang sebelumnya
                  * berbahaya jika dilewati , akan menjadi tidak berbahaya
@@ -181,7 +188,7 @@ public abstract class Board {
                                 ExGirlfriend tempEG = (ExGirlfriend) this.mapBoard[i][j];
                                 tempEG.makeItSafe();
                                 this.mapBoard[i][j] = tempEG;
-                                this.playerNowOn="Peace";
+                                this.playerNowOn = "Peace";
                             }
                         }
                     }
@@ -198,13 +205,19 @@ public abstract class Board {
                     this.mapBoard[newX][newY] = new BlankTile();
                     this.scriptLeft--;
                     this.view.printScriptLeft(this.scriptLeft);
-                    this.playerNowOn="Script";
-                } else if (tileName.equalsIgnoreCase("Tile.ExGirlfriend")) {
+                    this.playerNowOn = "Script";
+                }/**
+                 * Cek jika player berada di Tile ExGirlfriend yang sudah aman
+                 */
+                else if (tileName.equalsIgnoreCase("Tile.ExGirlfriend")) {
                     this.player.setPosition(newPosition);
-                    this.playerNowOn="ExGirlfriend";
-                } else if (tileName.equalsIgnoreCase("Tile.Computer")) {
+                    this.playerNowOn = "ExGirlfriend";
+                }/**
+                 * Cek jika player berada di Tile Computer yang sudah aman
+                 */
+                else if (tileName.equalsIgnoreCase("Tile.Computer")) {
                     this.player.setPosition(newPosition);
-                    this.playerNowOn="ExGirlfriend";
+                    this.playerNowOn = "ExGirlfriend";
                 }
             }
             /**
@@ -252,10 +265,16 @@ public abstract class Board {
         return player.isAlive();
     }
 
-    public String getPlayerNow(){
+    /**
+     * Method untuk mengetahui elemen dalam papan permainan yang sedang diinjak
+     * pemain saat ini
+     *
+     * @return String berisi elemen yang sedang diinjak pemain
+     */
+    public String getPlayerNow() {
         return this.playerNowOn;
     }
-    
+
     /**
      * Method untuk mengetahui kondisi pemain apakah pemain sudah mencapai
      * kemenangan atau belum

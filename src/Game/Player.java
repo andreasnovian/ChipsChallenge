@@ -55,8 +55,9 @@ public class Player {
     public String getAllKey() {
         String result="";
         for (int i=0;i<keyList.size();i++){
-            result+=keyList.get(i).getColor()+", ";
+            result+=keyList.get(i).getColor()+" ";
         }
+        result.trim();
         return result;
     }
 
@@ -152,16 +153,6 @@ public class Player {
      */
     public String getKeyColor(int index) {
         return keyList.get(index).getColor();
-    }
-
-    /**
-     * Method move untuk menggerakkan pemain supaya menghadap sesuai pergerakan
-     * yang dilakukan
-     *
-     * @param direction
-     */
-    public void move(int direction) {
-
     }
 
     /**

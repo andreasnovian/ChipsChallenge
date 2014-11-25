@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.event.KeyEvent;
+
 /**
  * Kelas yang digunakan untuk melakukan visualisasi papan permainan. Kelas ini
  * merupakan View dalam project ini
@@ -8,8 +10,14 @@ package GUI;
  */
 public class Interface extends javax.swing.JFrame {
 
-    private PanelTester panel;
-    
+    /**
+     * Atribut panel untuk menyimpan objek PanelTester
+     */
+    private Panel panel;
+
+    /**
+     * Atribut curStage untuk menyimpan stage yang sedang dimainkan saat ini
+     */
     private int curStage;
 
     /**
@@ -18,7 +26,6 @@ public class Interface extends javax.swing.JFrame {
     public Interface() {
         initComponents();
         this.curStage = 1;
-        setFocusable(true);
         this.setSize(900, 680);
         this.jInternalFrame1.setContentPane(new welcomePanel());
     }
@@ -32,7 +39,7 @@ public class Interface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        levelLabel = new javax.swing.JLabel();
+        stageLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         playerKeysField = new javax.swing.JTextField();
@@ -45,13 +52,13 @@ public class Interface extends javax.swing.JFrame {
         scriptLeftLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addKeyListener(new java.awt.event.KeyAdapter() {
+        this.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
             }
         });
 
-        levelLabel.setText("Level : ");
+        stageLabel.setText("Stage : ");
 
         jLabel3.setText(".");
 
@@ -87,7 +94,7 @@ public class Interface extends javax.swing.JFrame {
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 399, Short.MAX_VALUE)
+            .addGap(0, 407, Short.MAX_VALUE)
         );
 
         scriptLeftLabel.setText("Script Left : ");
@@ -114,7 +121,7 @@ public class Interface extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel6)
                                 .addComponent(jLabel7)
-                                .addComponent(levelLabel)
+                                .addComponent(stageLabel)
                                 .addComponent(jLabel4)
                                 .addComponent(playerKeysField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
@@ -127,7 +134,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(levelLabel)
+                        .addComponent(stageLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -156,25 +163,38 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Method sebagai pemroses tombol yang ditekan
+     *
+     * @param evt
+     */
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            System.out.println("aaaa");
+        }
+    }//GEN-LAST:event_formKeyPressed
+
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        this.panel = new PanelTester(this,this.curStage);
+        this.panel = new Panel(this, this.curStage);
+        this.stageLabel.setText("Stage : " + curStage);
         this.jInternalFrame1.setContentPane(this.panel);
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void restartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartButtonActionPerformed
-        this.panel = new PanelTester(this,this.curStage);
+        this.panel = new Panel(this, this.curStage);
+        this.stageLabel.setText("Stage : " + curStage);
         this.jInternalFrame1.setContentPane(this.panel);
     }//GEN-LAST:event_restartButtonActionPerformed
 
     public void printPlayerKeys(String key) {
         playerKeysField.setText(key);
     }
-    
-    public void printScriptLeft(int scriptLeft){
-        this.scriptLeftLabel.setText("Script Left : "+scriptLeft);
+
+    public void printScriptLeft(int scriptLeft) {
+        this.scriptLeftLabel.setText("Script Left : " + scriptLeft);
     }
-    
-    public void nextStage(){
+
+    public void nextStage() {
         this.curStage++;
     }
 
@@ -220,11 +240,11 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel levelLabel;
     private javax.swing.JButton newGameButton;
     private javax.swing.JTextField playerKeysField;
     private javax.swing.JButton restartButton;
     private javax.swing.JLabel scriptLeftLabel;
+    private javax.swing.JLabel stageLabel;
     // End of variables declaration//GEN-END:variables
 
 }

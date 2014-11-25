@@ -35,15 +35,17 @@ public class Stage3 extends Board {
         mapBoard[4][5] = new Computer();
         mapBoard[9][4] = new Computer();
         mapBoard[9][10] = new Computer();
+        mapBoard[10][4] = new Computer();
         mapBoard[11][10] = new Computer();
         mapBoard[11][4] = new Computer();
+        mapBoard[12][4] = new Computer();
         mapBoard[13][4] = new Computer();
         mapBoard[13][10] = new Computer();
     }
 
     @Override
     protected void setDeadElectricity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mapBoard[7][10] = new DeadElectricity();
     }
 
     @Override
@@ -60,12 +62,13 @@ public class Stage3 extends Board {
 
     @Override
     protected void setExGirlfriend() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mapBoard[4][12] = new ExGirlfriend();
+        mapBoard[5][2] = new ExGirlfriend();
     }
 
     @Override
     protected void setFinish() {
-        mapBoard[7][13] = new Finish();
+        mapBoard[6][13] = new Finish();
     }
 
     @Override
@@ -82,7 +85,7 @@ public class Stage3 extends Board {
 
     @Override
     protected void setPeace() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mapBoard[13][12] = new Peace();
     }
 
     @Override
@@ -126,6 +129,7 @@ public class Stage3 extends Board {
         mapBoard[6][4] = new Wall();
         mapBoard[7][11] = new Wall();
         mapBoard[7][12] = new Wall();
+        mapBoard[7][13] = new Wall();
         mapBoard[8][1] = new Wall();
         mapBoard[8][2] = new Wall();
         mapBoard[8][3] = new Wall();
