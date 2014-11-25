@@ -18,6 +18,7 @@ public class Interface extends javax.swing.JFrame {
      */
     public Interface() {
         initComponents();
+        this.setTitle("SkripChip's Challenge");
         this.setSize(900, 680);
         this.setResizable(false);
         this.jInternalFrame1.setContentPane(new welcomePanel());
