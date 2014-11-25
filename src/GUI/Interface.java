@@ -1,7 +1,5 @@
 package GUI;
 
-import java.awt.event.KeyEvent;
-
 /**
  * Kelas yang digunakan untuk melakukan visualisasi papan permainan. Kelas ini
  * merupakan View dalam project ini
@@ -27,6 +25,7 @@ public class Interface extends javax.swing.JFrame {
         initComponents();
         this.curStage = 1;
         this.setSize(900, 680);
+        this.setResizable(false);
         this.jInternalFrame1.setContentPane(new welcomePanel());
     }
 

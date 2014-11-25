@@ -5,7 +5,7 @@ import Tile.*;
 import java.awt.Point;
 
 /**
- * Kelas yang merepresentasikan objek stage 3 pada papan permainan
+ * Kelas yang merepresentasikan stage 3 pada papan permainan
  *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
