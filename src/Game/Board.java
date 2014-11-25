@@ -163,7 +163,6 @@ public abstract class Board {
                     if (this.player.getScript() == scriptNeeded) {
                         this.player.setPosition(newPosition);
                         this.player.win();
-                        this.view.nextStage();
                         this.playerNowOn = "Finish";
                     }
                 } /**

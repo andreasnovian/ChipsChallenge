@@ -14,16 +14,10 @@ public class Interface extends javax.swing.JFrame {
     private Panel panel;
 
     /**
-     * Atribut curStage untuk menyimpan stage yang sedang dimainkan saat ini
-     */
-    private int curStage;
-
-    /**
      * Creates new form Interface
      */
     public Interface() {
         initComponents();
-        this.curStage = 1;
         this.setSize(900, 680);
         this.setResizable(false);
         this.jInternalFrame1.setContentPane(new welcomePanel());
@@ -167,15 +161,18 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_formKeyPressed
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        this.panel = new Panel(this, this.curStage);
-        this.stageLabel.setText("Stage : " + curStage);
-        this.jInternalFrame1.setContentPane(this.panel);
+        if (this.panel == null) {
+            this.panel = new Panel(this);
+            this.jInternalFrame1.setContentPane(this.panel);
+        }
+        else {
+            panel.setStage(1);
+            panel.restart();
+        }
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void restartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartButtonActionPerformed
-        this.panel = new Panel(this, this.curStage);
-        this.stageLabel.setText("Stage : " + curStage);
-        this.jInternalFrame1.setContentPane(this.panel);
+        panel.restart();
     }//GEN-LAST:event_restartButtonActionPerformed
 
     /**
@@ -189,6 +186,23 @@ public class Interface extends javax.swing.JFrame {
     }
 
     /**
+     * Method untuk mengubah stageLabel menjadi sesuai stage yang sedang
+     * dimainkan
+     *
+     * @param stage int stage yang sedang dimainkan
+     */
+    public void setStageLabel(int stage) {
+        stageLabel.setText("Stage : " + stage);
+    }
+
+    /**
+     * Method untuk mengatur playerKeysField menjadi seperti awal
+     */
+    public void resetPlayerKeys() {
+        playerKeysField.setText("");
+    }
+
+    /**
      * Method untuk menuliskan sisa script yang harus dikumpulkan player ke
      * dalam scriptLeftLabel
      *
@@ -199,10 +213,12 @@ public class Interface extends javax.swing.JFrame {
     }
 
     /**
-     * Method untuk menambahkan atribut curStage sebanyak 1
+     * Method untuk mengatur scriptLeftLabel menjadi seperti awal
+     *
+     * @param scriptLeft script yang tersisa di awal setiap stage
      */
-    public void nextStage() {
-        this.curStage++;
+    public void resetScriptLeft(int scriptLeft) {
+        this.scriptLeftLabel.setText("Script Left : " + scriptLeft);
     }
 
     /**

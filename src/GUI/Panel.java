@@ -63,20 +63,11 @@ public class Panel extends JPanel implements KeyListener {
      */
     private URL[] playerUrl, barrierUrl, blankTileUrl, computerUrl, deadElectricityUrl, doorUrl, exGirlfriendUrl, finishUrl, keyUrl, peaceUrl, scriptUrl, wallUrl;
 
-    public Panel(Interface view, int stage) {
+    public Panel(Interface view) {
         this.view = view;
-        this.stage = stage;
-        switch (stage) {
-            case 1:
-                this.board = new Stage1(view);
-                break;
-            case 2:
-                this.board = new Stage2(view);
-                break;
-            case 3:
-                this.board = new Stage3(view);
-                break;
-        }
+        this.stage = 1;
+        view.setStageLabel(stage);
+        this.board = new Stage1(view);
         addKeyListener(this);
         this.posPlayer = 1;
         this.loadImage();
@@ -85,7 +76,61 @@ public class Panel extends JPanel implements KeyListener {
     }
 
     /**
-     * Method untuk melakukan inisialisasi pada tiap atribut
+     * Method untuk melakukan proses berpindah ke stage selanjutnya
+     */
+    public void nextStage() {
+        this.stage++;
+        restart();
+    }
+
+    /**
+     * Method untuk melakukan proses restart pada panel
+     */
+    public void restart() {
+        switch (stage) {
+            case 1:
+                this.board = new Stage1(view);
+                view.setStageLabel(stage);
+                view.resetPlayerKeys();
+                view.resetScriptLeft(6);
+                setImage();
+                repaint();
+                break;
+            case 2:
+                this.board = new Stage2(view);
+                view.setStageLabel(stage);
+                view.resetPlayerKeys();
+                view.resetScriptLeft(7);
+                setImage();
+                repaint();
+                break;
+            case 3:
+                this.board = new Stage3(view);
+                view.setStageLabel(stage);
+                view.resetPlayerKeys();
+                view.resetScriptLeft(8);
+                setImage();
+                repaint();
+                break;
+            default:
+                this.board = null;
+                break;
+        }
+        this.posPlayer = 1;
+    }
+    
+    /**
+     * Method untuk mengatur atribut stage menjadi sesuai parameter stage
+     * @param stage int stage yang baru
+     */
+    public void setStage(int stage){
+        this.stage = stage;
+        restart();
+    }
+
+    /**
+     * Method untuk melakukan inisialisasi pada tiap atribut URL dengan alamat
+     * dari tiap elemen pada model
      */
     private void loadImage() {
         playerUrl = new URL[10];
@@ -177,6 +222,10 @@ public class Panel extends JPanel implements KeyListener {
         wallUrl[0] = getClass().getClassLoader().getResource("GUI/Rooms/wall.png");
     }
 
+    /**
+     * Method untuk melakukan inisialisasi pada tiap atribut Image dengan alamat
+     * URL untuk tiap elemen pada model
+     */
     private void setImage() {
         String[][] map = board.printMap();
         for (int i = 0; i < 15; i++) {
@@ -309,8 +358,9 @@ public class Panel extends JPanel implements KeyListener {
     }
 
     /**
+     * Method untuk menggambar panel
      *
-     * @param g
+     * @param g objek dari kelas Graphics
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -338,10 +388,9 @@ public class Panel extends JPanel implements KeyListener {
                 this.g.drawString("LEVEL COMPLETED !", 175, 300);
                 font = new Font("Trebuchet MS", Font.PLAIN, 30);
                 this.g.setFont(font);
-                this.g.drawString("PRESS [ENTER] TO EXIT", 155, 330);
+                this.g.drawString("PRESS [ENTER] TO CONTINUE", 105, 330);
             }
-        }
-        if (!board.isPlayerAlive()) {
+        } else if (!board.isPlayerAlive()) {
             this.g.setColor(Color.black);
             this.g.fillRect(0, 0, 600, 600);
             Font font = new Font("Trebuchet MS", Font.PLAIN, 60);
@@ -350,22 +399,19 @@ public class Panel extends JPanel implements KeyListener {
             this.g.drawString("GAME OVER !", 125, 300);
             font = new Font("Trebuchet MS", Font.PLAIN, 30);
             this.g.setFont(font);
-            this.g.drawString("PRESS [ENTER] TO EXIT", 145, 360);
+            this.g.drawString("PRESS RESTART BUTTON", 145, 360);
         }
     }
 
-    /**
-     *
-     * @param ke
-     */
     @Override
     public void keyTyped(KeyEvent ke) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
+     * Method untuk menerima dan menanggapi penekanan tombol arah dan enter
      *
-     * @param ke
+     * @param ke objek dari kelas KeyEvent
      */
     @Override
     public void keyPressed(KeyEvent ke) {
@@ -401,63 +447,17 @@ public class Panel extends JPanel implements KeyListener {
             }
         }
         if (code == KeyEvent.VK_ENTER) {
+            this.nextStage();
+        }
+        if (code == KeyEvent.VK_ESCAPE) {
             view.dispose();
         }
         setImage();
         repaint();
     }
 
-    /**
-     *
-     * @param ke
-     */
     @Override
     public void keyReleased(KeyEvent ke) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-//    public void move(int code) {
-//        switch (code) {
-//            case 0: //up
-//                board.move(-1, 0);
-//                if (board.getPlayerNow().equalsIgnoreCase("Barrier")) {
-//                    posPlayer = 6;
-//                } else {
-//                    posPlayer = 2;
-//                }
-//                setImage();
-//                repaint();
-//                break;
-//            case 1: //down
-//                board.move(1, 0);
-//                if (board.getPlayerNow().equalsIgnoreCase("Barrier")) {
-//                    posPlayer = 7;
-//                } else {
-//                    posPlayer = 3;
-//                }
-//                setImage();
-//                repaint();
-//                break;
-//            case 2: //right
-//                board.move(0, 1);
-//                if (board.getPlayerNow().equalsIgnoreCase("Barrier")) {
-//                    posPlayer = 8;
-//                } else {
-//                    posPlayer = 4;
-//                }
-//                setImage();
-//                repaint();
-//                break;
-//            case 3: //left
-//                board.move(0, -1);
-//                if (board.getPlayerNow().equalsIgnoreCase("Barrier")) {
-//                    posPlayer = 9;
-//                } else {
-//                    posPlayer = 5;
-//                }
-//                setImage();
-//                repaint();
-//                break;
-//        }
-//    }
 }
