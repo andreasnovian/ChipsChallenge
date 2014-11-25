@@ -24,6 +24,7 @@ public class PanelTester extends JPanel implements KeyListener {
     private Image[][] img = new Image[15][15];
     private Board board;
     private Graphics g;
+    private int posPlayer;
     private URL[] playerUrl, barrierUrl, blankTileUrl, computerUrl, deadElectricityUrl, doorUrl, exGirlfriendUrl, finishUrl, keyUrl, peaceUrl, scriptUrl, wallUrl;
 
     public PanelTester(Interface view, int stage) {
@@ -40,6 +41,7 @@ public class PanelTester extends JPanel implements KeyListener {
                 break;
         }
         addKeyListener(this);
+        this.posPlayer = 1;
         this.loadImage();
         this.setImage();
         setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -143,7 +145,7 @@ public class PanelTester extends JPanel implements KeyListener {
                 for (int j = 0; j < 15; j++) {
                     switch (map[i][j]) {
                         case "Player":
-                            img[i][j] = ImageIO.read(playerUrl[1]);
+                            img[i][j] = ImageIO.read(playerUrl[this.posPlayer]);
                             break;
                         case "Tile.Computer":
                             img[i][j] = ImageIO.read(computerUrl[0]);
@@ -152,7 +154,7 @@ public class PanelTester extends JPanel implements KeyListener {
                             img[i][j] = ImageIO.read(barrierUrl[0]);
                             break;
                         case "Tile.Finish":
-                            img[i][j] = ImageIO.read(finishUrl[1]);
+                            img[i][j] = ImageIO.read(finishUrl[5]);
                             break;
                         case "Tile.Wall":
                             img[i][j] = ImageIO.read(wallUrl[0]);
@@ -287,14 +289,56 @@ public class PanelTester extends JPanel implements KeyListener {
         int code = ke.getKeyCode();
 
         if (code == KeyEvent.VK_LEFT) {
-            board.move(0, -1);
+            try {
+                board.move(0, -1);
+                if(board.getPlayerNow().equalsIgnoreCase("Barrier")){
+                    img[board.getPlayerPosition().x][board.getPlayerPosition().x]=ImageIO.read(playerUrl[9]);
+                }else{
+                    posPlayer = 5;
+                    //img[board.getPlayerPosition().x][board.getPlayerPosition().x]=ImageIO.read(playerUrl[5]);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(PanelTester.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (code == KeyEvent.VK_UP) {
-            board.move(-1, 0);
+            try {
+                board.move(-1, 0);
+                if(board.getPlayerNow().equalsIgnoreCase("Barrier")){
+                    img[board.getPlayerPosition().x][board.getPlayerPosition().x]=ImageIO.read(playerUrl[6]);
+                }else{
+                    posPlayer = 2;
+                    //img[board.getPlayerPosition().x][board.getPlayerPosition().x]=ImageIO.read(playerUrl[2]);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(PanelTester.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (code == KeyEvent.VK_RIGHT) {
-            board.move(0, 1);
+            try {
+                board.move(0, 1);
+                if(board.getPlayerNow().equalsIgnoreCase("Barrier")){
+                    img[board.getPlayerPosition().x][board.getPlayerPosition().x]=ImageIO.read(playerUrl[8]);
+                }else{
+                    posPlayer = 4;
+                    //img[board.getPlayerPosition().x][board.getPlayerPosition().x]=ImageIO.read(playerUrl[4]);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(PanelTester.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (code == KeyEvent.VK_DOWN) {
-            board.move(1, 0);
+            try {
+                board.move(1, 0);
+                if(board.getPlayerNow().equalsIgnoreCase("Barrier")){
+                    img[board.getPlayerPosition().x][board.getPlayerPosition().x]=ImageIO.read(playerUrl[7]);
+                }else{
+                    posPlayer = 3;
+                    //img[board.getPlayerPosition().x][board.getPlayerPosition().x]=ImageIO.read(playerUrl[3]);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(PanelTester.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
+        
         setImage();
         repaint();
     }

@@ -10,15 +10,8 @@ package Tile;
 public class Barrier extends AbstractTile {
 
     public Barrier() {
-        canBeStepped = false;
-        isDanger = false;
-    }
-
-    /**
-     * Method untuk membuat atribut canBeStepped menjadi true
-     */
-    public void makeItCanBeStepped() {
         canBeStepped = true;
+        isDanger = false;
     }
 
 }

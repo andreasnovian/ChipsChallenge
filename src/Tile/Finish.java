@@ -10,15 +10,8 @@ package Tile;
 public class Finish extends AbstractTile {
 
     public Finish(){
-        canBeStepped = false;
-        isDanger = false;
-    }
-
-    /**
-     * Method untuk membuat atribut canBeStepped menjadi true
-     */
-    public void makeItCanBeStepped() {
         canBeStepped = true;
+        isDanger = false;
     }
 
 }
