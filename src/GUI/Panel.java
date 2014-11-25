@@ -8,7 +8,8 @@ import javax.swing.*;
 
 /**
  * Kelas yang digunakan untuk membantu kelas Interface melakukan visualisasi
- * papan permainan. Kelas ini merupakan View dalam project ini
+ * papan permainan. Kelas ini membantu menampilkan tampilan utama permainan.
+ * Kelas ini merupakan View dalam project ini.
  *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */

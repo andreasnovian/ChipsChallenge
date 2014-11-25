@@ -12,7 +12,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
- * 
+ * Kelas yang digunakan untuk membantu kelas Interface melakukan visualisasi
+ * papan permainan. Kelas ini membantu menampilkan tampilan awal permainan.
+ * Kelas ini merupakan View dalam project ini.
+ *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public class welcomePanel extends JPanel {
@@ -21,7 +24,7 @@ public class welcomePanel extends JPanel {
      * Atribut untuk menyimpan alamat gambar untuk halaman awal
      */
     private URL imageUrl;
-    
+
     /**
      * Atribut untuk menyimpan objek Image gambar untuk halaman awal
      */
