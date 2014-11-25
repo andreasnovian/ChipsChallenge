@@ -447,7 +447,9 @@ public class Panel extends JPanel implements KeyListener {
             }
         }
         if (code == KeyEvent.VK_ENTER) {
-            this.nextStage();
+            if (board.isPlayerWin()){
+                this.nextStage();
+            }
         }
         if (code == KeyEvent.VK_ESCAPE) {
             view.dispose();
