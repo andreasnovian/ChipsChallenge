@@ -5,190 +5,334 @@ import Tile.*;
 import java.awt.Point;
 
 /**
- * Kelas yang merepresentasikan papan permainan dalam permainan
+ * Kelas abstract yang digunakan untuk menginstansiasi papan permainan. Kelas
+ * ini beserta turunannya merupakan Controller dalam project ini
  *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
 public abstract class Board {
 
+    /**
+     * Atribut view yang merupakan objek dari kelas Interface. Atribut ini akan
+     * diberitahu jika terjadi perubahan pada papan permainan yang mengharuskan
+     * perubahan pada tampilan visual
+     */
     private Interface view;
-    protected int ScriptNeeded;
+
+    /**
+     * Atribut scriptNeeded untuk menyimpan jumlah script yang harus dikumpulkan
+     * oleh pemain pada setiap stage
+     */
+    protected int scriptNeeded;
+
+    /**
+     * Atribut scriptLeft untuk menyimpan jumlah script yang tersisa setiap kali
+     * pemain mendapatkan sebuah script
+     */
+    protected int scriptLeft;
+
+    /**
+     * Atribut player untuk menyimpan pemain yang bermain dalam papan permainan
+     */
     protected Player player;
-    protected boolean isFinished;
+
+    /**
+     * Atribut mapBoard untuk menyimpan komponen penyusun papan permainan yang
+     * merupakan objek dari turunan kelas AbstractTile
+     */
     protected AbstractTile[][] mapBoard;
 
-    public Board(Interface view, int scriptNeeded, String name) {
+    public Board(Interface view, int scriptNeeded, Point playerPosition) {
         this.view = view;
-        this.ScriptNeeded = scriptNeeded;
-        this.player = new Player(name);
-        this.isFinished = false;
+        this.scriptNeeded = scriptNeeded;
+        this.scriptLeft = scriptNeeded;
+        this.player = new Player(playerPosition);
         this.mapBoard = new AbstractTile[15][15];
+        this.view.printScriptLeft(scriptNeeded);
+        this.setMap();
     }
 
+    /**
+     * Method untuk menggerakkan pemain dalam papan permainan
+     *
+     * @param x jumlah pergerakan dalam sumbu x
+     * @param y jumlah pergerakan dalam sumbu y
+     */
     public void move(int x, int y) {
+        /**
+         * Membuat atribut Lokal bertipe data int yang berupa posisi baru
+         * setelah menerima input terbaru (axis X)
+         */
         int newX = (int) this.player.getPosition().getX() + x;
-        int newY = (int) this.player.getPosition().getY() + y;
-        Point newPosition = new Point(newX, newY);
-        if (this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()].canBeStepped()) {
-            /**
-             * jika posisi sekarang berada di barrier
-             */
-            if (this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()].isBarrier()) {
-                /**
-                 * jika jumlah chip yang dibutuhkan sama atau tidak dengan chip
-                 * yang dibawa
-                 */
-                if (this.ScriptNeeded == this.player.getScript()) {
-                    this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()] = new BlankTile();
-                    this.player.setPosition(newPosition);
-                } else {
 
-                }
+        /**
+         * Membuat atribut Lokal bertipe data int yang berupa posisi baru
+         * setelah menerima input terbaru (axis Y)
+         */
+        int newY = (int) this.player.getPosition().getY() + y;
+
+        /**
+         * Membuat atribut Lokal bertipe data point dengan parameter newX dan
+         * newY yang sudah dibuat
+         */
+        Point newPosition = new Point(newX, newY);
+
+        /**
+         *
+         */
+        String tileName = mapBoard[newX][newY].getClass().getName();
+        /**
+         * Cek apakah mapboard[newX][newY] dapat dilewati atau tidak Jika dapat
+         * dilewati cek kemungkinan selanjutnya Jika tidak posisi player tetap
+         */
+        if (this.mapBoard[newX][newY].canBeStepped()) {
+            /**
+             * Cek apakah mapboard[newX][newY] berbahaya atau tidak isDanger >>
+             * Computer dan ExGirlFriend jika bahaya posisi player ditempatkan
+             * di posisi yang baru , dan player mati
+             */
+            if (this.mapBoard[newX][newY].isDanger()) {
+                this.player.setPosition(newPosition);
+                this.player.kill();
+            } else {
                 /**
-                 * jika posisi sekarang berada di pintu
+                 * Cek player berada di posisi Barrier Player dapat menembus
+                 * barrier jika jumlah script yang dibutuhkan sudah terpenuhi
+                 * jika tidak , posisi player tidak berubah
                  */
-            } else if (this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()].isDoor()) {
-                Door door = (Door) this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()];
-                for (int i = 0; i < this.player.getKeysLength(); i++) {
-                    /**
-                     * jika warna pintu sama dengan kunci yang dimiliki
-                     */
-                    if (door.getColor().equalsIgnoreCase(this.player.getKeysIndex(i))) {
-                        this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()] = new BlankTile();
+                if (tileName.equalsIgnoreCase("Tile.Barrier")) {
+                    if (this.player.getScript() == scriptNeeded) {
+                        this.mapBoard[newX][newY] = new BlankTile();
                         this.player.setPosition(newPosition);
                     }
+                } /**
+                 * Cek player berada di posisi BlankTile Posisi player diset ke
+                 * posisi yang baru
+                 */
+                else if (tileName.equalsIgnoreCase("Tile.BlankTile")) {
+                    this.player.setPosition(newPosition);
+                } /**
+                 * Cek player berada di DeadElectricity Semua komputer yang
+                 * sebelumnya berbahaya jika dilewati , akan menjadi tidak
+                 * berbahaya
+                 */
+                else if (tileName.equalsIgnoreCase("Tile.DeadElectricity")) {
+                    for (int i = 0; i < this.mapBoard.length; i++) {
+                        for (int j = 0; j < this.mapBoard[i].length; j++) {
+                            if (this.mapBoard[i][j].getClass().getName().equalsIgnoreCase("Computer")) {
+                                Computer temp = (Computer) this.mapBoard[i][j];
+                                temp.makeItSafe();
+                                this.mapBoard[i][j] = temp;
+                            }
+                        }
+                    }
+                    this.player.setPosition(newPosition);
+                    this.mapBoard[newX][newY] = new BlankTile();
+                } /**
+                 * Cek player berada di posisi door Player dapat membuka pintu
+                 * jika kunci yang dimiliki sesuai dengan pintu
+                 */
+                else if (tileName.equalsIgnoreCase("Tile.Door")) {
+                    Door tempDoor = (Door) this.mapBoard[newX][newY];
+                    for (int i = 0; i < this.player.getNumOfKey(); i++) {
+                        if (tempDoor.getColor().equalsIgnoreCase(this.player.getKey(i).getColor())) {
+                            this.mapBoard[newX][newY] = new BlankTile();
+                            this.player.setPosition(newPosition);
+                        }
+                    }
+                } /**
+                 * Cek player berada diposisi Finish Player melanjutkan ke stage
+                 * berikutnya
+                 */
+                else if (tileName.equalsIgnoreCase("Tile.Finish")) {
+                    if (this.player.getScript() == scriptNeeded) {
+                        this.player.setPosition(newPosition);
+                        this.player.isWin();
+                    }
+                } /**
+                 * Cek player jika berada di Key Key akan ditambahkan ke
+                 * ArrayList<Key> dikelas Player
+                 */
+                else if (tileName.equalsIgnoreCase("Tile.Key")) {
+                    Key tempKey = (Key) mapBoard[newX][newY];
+                    this.player.addKey(tempKey);
+                    this.mapBoard[newX][newY] = new BlankTile();
+                    this.player.setPosition(newPosition);
+                    view.printPlayerKeys(player.getAllKey());
+                } /**
+                 * Cek player berada di Peace Semua ExGirlFriend yang sebelumnya
+                 * berbahaya jika dilewati , akan menjadi tidak berbahaya
+                 */
+                else if (tileName.equalsIgnoreCase("Tile.Peace")) {
+                    for (int i = 0; i < this.mapBoard.length; i++) {
+                        for (int j = 0; j < this.mapBoard[i].length; j++) {
+                            if (this.mapBoard[i][j].getClass().getName().equalsIgnoreCase("ExGirlFriend")) {
+                                ExGirlfriend tempEG = (ExGirlfriend) this.mapBoard[i][j];
+                                tempEG.makeItSafe();
+                                this.mapBoard[i][j] = tempEG;
+                            }
+                        }
+                    }
+                    this.player.setPosition(newPosition);
+                    this.mapBoard[newX][newY] = new BlankTile();
+                } /**
+                 * Cek player berada di Script Jika berada di Script , jumlah
+                 * script yang dimiliki player akan bertambah
+                 */
+                else if (tileName.equalsIgnoreCase("Tile.Script")) {
+                    Script tempScript = (Script) mapBoard[newX][newY];
+                    this.player.addScript();
+                    this.player.setPosition(newPosition);
+                    this.mapBoard[newX][newY] = new BlankTile();
+                    this.scriptLeft--;
+                    this.view.printScriptLeft(this.scriptLeft);
                 }
-                /**
-                 * jika yang diinjak itu bahaya atau tidak , jika bahaya ,
-                 * lansung kalah
-                 */
-            } else if (this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()].isDanger()) {
-                this.player.setLife(false);
-                this.player.setPosition(newPosition);
-                /**
-                 * jika posisi sekarang menginjak di posisi kunci
-                 */
-            } else if (this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()].isKey()) {
-                Key newKey = (Key) this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()];
-                this.player.setKeys(newKey);
-                this.player.setPosition(newPosition);
-                this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()] = new Table();
-                /**
-                 * jika posisi sekarang menginjak di posisi Integrated Circuit
-                 */
-            } else if (mapBoard[(int) newPosition.getX()][(int) newPosition.getY()].isScript()) {
-                this.player.addScript();
-                this.player.setPosition(newPosition);
-                this.mapBoard[(int) newPosition.getX()][(int) newPosition.getY()] = new Table();
-            } else if (mapBoard[(int) newPosition.getX()][(int) newPosition.getY()].isFinish()) {
-                this.player.setPosition(newPosition);
-                this.isFinished = true;
-            } else {
-                this.player.setPosition(newPosition);
             }
+            /**
+             * Jika tidak dapat dilewati , maka posisi player tetap
+             */
+        } else {
+
         }
-        printMap();
     }
 
+    /**
+     * Method untuk mencetak papan permainan
+     *
+     * @return array 2 dimensi bertipe String yang berisi papan permainan dalam
+     * bentuk string
+     */
     public String[][] printMap() {
-        String[][] map = new String[this.mapBoard.length][this.mapBoard[0].length];
-        int positionX = this.player.getPosition().x;
-        int positionY = this.player.getPosition().y;
+        String[][] map = new String[15][15];
 
         for (int i = 0; i < this.mapBoard.length; i++) {
-            for (int j = 0; j < this.mapBoard.length; j++) {
-                if (positionX == i && positionY == j) {
-                    map[i][j] = "Player";
-                } else if (this.mapBoard[i][j].isDanger()) {
-                    map[i][j] = "Computer";
-                } else if (this.mapBoard[i][j].isBarrier()) {
-                    map[i][j] = "Barrier";
-                } else if (this.mapBoard[i][j].isDoor()) {
+            for (int j = 0; j < this.mapBoard[0].length; j++) {
+                map[i][j] = this.mapBoard[i][j].getClass().getName();
+                if (map[i][j].equalsIgnoreCase("Tile.Door")) {
                     Door door = (Door) this.mapBoard[i][j];
                     map[i][j] = door.getColor();
-                } else if (this.mapBoard[i][j].isFinish()) {
-                    map[i][j] = "Finish";
-                } else if (this.mapBoard[i][j].isKey()) {
+                }
+                if (map[i][j].equalsIgnoreCase("Tile.Key")) {
                     Key key = (Key) this.mapBoard[i][j];
-                    map[i][j] = key.getColorKey();
-                } else if (this.mapBoard[i][j].isWall()) {
-                    map[i][j] = "Wall";
-                } else if (this.mapBoard[i][j].isScript()) {
-                    map[i][j] = "Script";
-                } else if (this.mapBoard[i][j].isTable()) {
-                    map[i][j] = "Table";
-                } else {
-                    map[i][j] = "Blank";
+                    map[i][j] = key.getColor();
                 }
             }
-            
         }
+        map[player.getPosition().x][player.getPosition().y] = "Player";
 
         return map;
     }
 
-    public boolean isPlayerDead() {
-        return !player.isLife();
+    /**
+     * Method untuk mengetahui kondisi pemain yang bermain dalam papan permainan
+     * apakah pemain dalam keadaan hidup atau tidak
+     *
+     * @return true jika hidup dan false jika tidak
+     */
+    public boolean isPlayerAlive() {
+        return player.isAlive();
     }
 
-    public boolean getIsFinished() {
-        return isFinished;
+    /**
+     * Method untuk mengetahui kondisi pemain apakah pemain sudah mencapai
+     * kemenangan atau belum
+     *
+     * @return true jika menang dan false jika belum
+     */
+    public boolean isPlayerWin() {
+        return player.isWin();
     }
 
-    public void setIsFinished(boolean isFinish) {
-        isFinished = isFinish;
-    }
-
-    public Point getPlayerPosition() {
+    /**
+     * Method untuk mengetahui posisi pemain dalam papan permainan
+     *
+     * @return objek Point yang menyimpan koordinat posisi pemain
+     */
+    protected Point getPlayerPosition() {
         return player.getPosition();
     }
 
-    protected void setMapPosition() {
-        this.setAllBlankTilePosition();
-        this.setWallBorderPosition();
-        this.setBarrierPosition();
-        this.setComputerPosition();
-        this.setDoorPosition();
-        this.setFinishPosition();
-        this.setKeyPosition();
-        this.setScriptPosition();
-        this.setTablePosition();
-        this.setWallMapPosition();
+    /**
+     * Method untuk melakukan inisialisasi papan permainan dengan komponen
+     * berupa objek dari turunan kelas AbstractTile
+     */
+    private void setMap() {
+        setBlankTile();
+        setBarrier();
+        setComputer();
+        setDoor();
+        setFinish();
+        setKey();
+        setScript();
+        setWall();
+        setDeadElectricity();
+        setExGirlfriend();
+        setPeace();
     }
 
-    private void setAllBlankTilePosition() {
-        for (int i = 0; i < mapBoard.length; i++) {
-            for (int j = 0; j < mapBoard.length; j++) {
-                mapBoard[i][j] = new BlankTile();
-            }
-        }
-    }
+    /**
+     * Set posisi BlankTile
+     */
+    protected abstract void setBlankTile();
 
-    private void setWallBorderPosition() {
-        for (int i = 0; i < mapBoard.length; i++) {
-            mapBoard[0][i] = new Wall();
-            mapBoard[mapBoard.length - 1][i] = new Wall();
-        }
-        for (int i = 0; i < mapBoard.length; i++) {
-            mapBoard[i][0] = new Wall();
-            mapBoard[i][mapBoard.length - 1] = new Wall();
-        }
-    }
+    /**
+     * Set posisi Barrier
+     *
+     */
+    protected abstract void setBarrier();
 
-    protected abstract void setWallMapPosition();
+    /**
+     * Set posisi Computer
+     *
+     */
+    protected abstract void setComputer();
 
-    protected abstract void setTablePosition();
+    /**
+     * Set posisi DeadElectricity
+     *
+     */
+    protected abstract void setDeadElectricity();
 
-    protected abstract void setDoorPosition();
+    /**
+     * Set posisi Door
+     *
+     */
+    protected abstract void setDoor();
 
-    protected abstract void setKeyPosition();
+    /**
+     * Set posisi ExGirlfriend
+     *
+     */
+    protected abstract void setExGirlfriend();
 
-    protected abstract void setComputerPosition();
+    /**
+     * Set posisi Finish
+     *
+     */
+    protected abstract void setFinish();
 
-    protected abstract void setScriptPosition();
+    /**
+     * Set posisi Key
+     *
+     */
+    protected abstract void setKey();
 
-    protected abstract void setBarrierPosition();
+    /**
+     * Set posisi Peace
+     *
+     */
+    protected abstract void setPeace();
 
-    protected abstract void setFinishPosition();
+    /**
+     * Set posisi Script
+     *
+     */
+    protected abstract void setScript();
+
+    /**
+     * Set posisi Wall
+     *
+     */
+    protected abstract void setWall();
 
 }

@@ -1,15 +1,15 @@
 package Tile;
 
 /**
- * Kelas yang merepresentasikan komponen tile computer dalam permainan. Tile
- * computer adalah komponen yang akan mengakhiri permainan dan membuat pemain
- * kalah jika diinjak
+ * Kelas yang merepresentasikan komponen tile ex girlfriend dalam permainan.
+ * Tile ex girlfriend adalah komponen yang akan mengakhiri permainan dan membuat
+ * pemain kalah jika diinjak
  *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
-public class Computer extends AbstractTile {
+public class ExGirlfriend extends AbstractTile {
 
-    public Computer() {
+    public ExGirlfriend(){
         canBeStepped = true;
         isDanger = true;
     }

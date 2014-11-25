@@ -21,7 +21,7 @@ public class welcomePanel extends JPanel {
     private Image img;
 
     public welcomePanel() {
-        this.imageUrl = getClass().getClassLoader().getResource("GUI/Rooms/welcome.jpg");
+        this.imageUrl = getClass().getClassLoader().getResource("GUI/Rooms/welcome.png");
         try {
             this.img = ImageIO.read(imageUrl);
         } catch (IOException ex) {

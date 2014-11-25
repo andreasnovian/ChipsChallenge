@@ -1,22 +1,23 @@
 package GUI;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 /**
+ * Kelas yang digunakan untuk melakukan visualisasi papan permainan. Kelas ini
+ * merupakan View dalam project ini
  *
  * @author Kevin Rizkhy, Andreas Novian, Dimas Nathanael
  */
-public class Interface extends javax.swing.JFrame implements KeyListener{
+public class Interface extends javax.swing.JFrame {
 
     private PanelTester panel;
     
+    private int curStage;
+
     /**
      * Creates new form Interface
      */
     public Interface() {
         initComponents();
-        addKeyListener(this);
+        this.curStage = 1;
         setFocusable(true);
         this.setSize(900, 680);
         this.jInternalFrame1.setContentPane(new welcomePanel());
@@ -31,9 +32,7 @@ public class Interface extends javax.swing.JFrame implements KeyListener{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        nameTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        levelLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         playerKeysField = new javax.swing.JTextField();
@@ -47,18 +46,11 @@ public class Interface extends javax.swing.JFrame implements KeyListener{
         exitButton = new javax.swing.JButton();
         newGameButton = new javax.swing.JButton();
         jInternalFrame1 = new javax.swing.JInternalFrame();
+        scriptLeftLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Name :");
-
-        nameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameTextFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Level :");
+        levelLabel.setText("Level : ");
 
         jLabel3.setText(".");
 
@@ -80,8 +72,18 @@ public class Interface extends javax.swing.JFrame implements KeyListener{
         });
 
         restartButton.setText("Restart");
+        restartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restartButtonActionPerformed(evt);
+            }
+        });
 
         exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         newGameButton.setText("New Game");
         newGameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -100,8 +102,10 @@ public class Interface extends javax.swing.JFrame implements KeyListener{
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 287, Short.MAX_VALUE)
+            .addGap(0, 343, Short.MAX_VALUE)
         );
+
+        scriptLeftLabel.setText("Script Left : ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,13 +117,9 @@ public class Interface extends javax.swing.JFrame implements KeyListener{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -129,12 +129,16 @@ public class Interface extends javax.swing.JFrame implements KeyListener{
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(newGameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(playerKeysField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(levelLabel)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8)
+                            .addComponent(playerKeysField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(timeProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addComponent(jLabel3))
-                    .addComponent(timeProgress, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scriptLeftLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -143,20 +147,18 @@ public class Interface extends javax.swing.JFrame implements KeyListener{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
+                        .addComponent(levelLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(playerKeysField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
+                        .addGap(18, 18, 18)
+                        .addComponent(scriptLeftLabel)
+                        .addGap(17, 17, 17)
                         .addComponent(jLabel8)
                         .addGap(14, 14, 14)
                         .addComponent(timeProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(pauseButton)
                             .addComponent(newGameButton))
@@ -182,18 +184,35 @@ public class Interface extends javax.swing.JFrame implements KeyListener{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameTextFieldActionPerformed
-
     private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pauseButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pauseButtonActionPerformed
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        this.panel = new PanelTester (this,1);
-        this.jInternalFrame1.setContentPane(panel);
+        this.panel = new PanelTester(this,this.curStage);
+        this.jInternalFrame1.setContentPane(this.panel);
     }//GEN-LAST:event_newGameButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void restartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartButtonActionPerformed
+        this.panel = new PanelTester(this,this.curStage);
+        this.jInternalFrame1.setContentPane(this.panel);
+    }//GEN-LAST:event_restartButtonActionPerformed
+
+    public void printPlayerKeys(String key) {
+        playerKeysField.setText(key);
+    }
+    
+    public void printScriptLeft(int scriptLeft){
+        this.scriptLeftLabel.setText("Script Left : "+scriptLeft);
+    }
+    
+    public void nextStage(){
+        this.curStage++;
+    }
 
     /**
      * @param args the command line arguments
@@ -233,44 +252,19 @@ public class Interface extends javax.swing.JFrame implements KeyListener{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField nameTextField;
+    private javax.swing.JLabel levelLabel;
     private javax.swing.JButton newGameButton;
     private javax.swing.JButton pauseButton;
     private javax.swing.JTextField playerKeysField;
     private javax.swing.JButton restartButton;
+    private javax.swing.JLabel scriptLeftLabel;
     private javax.swing.JProgressBar timeProgress;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void keyTyped(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void keyPressed(KeyEvent ke) {
-        int code = ke.getKeyCode();
-
-        if (code == KeyEvent.VK_LEFT) {
-            panel.move(0, -1);
-        } else if (code == KeyEvent.VK_UP) {
-            panel.move(-1, 0);
-        } else if (code == KeyEvent.VK_RIGHT) {
-            panel.move(0, 1);
-        } else if (code == KeyEvent.VK_DOWN) {
-            panel.move(1, 0);
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
